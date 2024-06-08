@@ -48,8 +48,8 @@ npm run dev
 
 <details>
 <summary>
-🐳 Run with Docker
 
+####🐳 Run with Docker
 </summary>
 
 - For running application in Docker container you should have docker installed on your system
