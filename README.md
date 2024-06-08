@@ -331,6 +331,329 @@ Status `404 Not found`
 
 </details>
 
+### Patient
+
+#### Get all patient
+
+##### `/patient`
+
+- **GET** :
+
+```javascript
+`${BASE_URL}/patient?search={search string}&limit={limit number}&page={page number}`;
+```
+
+**Only doctors can access the patient list!**
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+Get all patient
+
+| Parameter | Type   | Required | Description                                   | Default |
+| --------- | ------ | -------- | --------------------------------------------- | ------- |
+| limit     | string | No       | Maximum number of records returned.           | 5       |
+| page      | number | No       | To return records skipping the limit n times. | 0       |
+| search    | string | No       | Part of the name to search for.               | none    |
+
+<details>
+<summary>
+Reponse 
+</summary>
+<br>
+
+Status `200 OK`
+<br>
+
+```json
+{
+  "results": [
+    {
+      "id_patient": 1,
+      "patient_name": "Patient Lorem",
+      "email": "patient_lorem@email.com"
+    },
+    {
+      "id_patient": 2,
+      "patient_name": "Patient Ipsum",
+      "email": "patient_ipsum@email.com"
+    },
+    {
+      "id_patient": 3,
+      "patient_name": "Patient Ipsum Lorem",
+      "email": "patient_ipsum_lorem@email.com"
+    },
+    {
+      "id_patient": 4,
+      "patient_name": "Patient Cicero",
+      "email": "patient_cicero@email.com"
+    },
+    {
+      "id_patient": 5,
+      "patient_name": "Patient Consectetur",
+      "email": "patient_consectetur@email.com"
+    }
+  ],
+  "total": 100
+}
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid or you are not allowed!"
+}
+```
+
+</details>
+
+#### Get one patient by id
+
+##### `/patient/:patientId`
+
+- **GET** :
+
+```javascript
+`${BASE_URL}/patient/{patientId}`;
+```
+
+**Only the doctor or the patient can access this information**
+
+- Headers (application/json)
+
+        Authorization: Bearer [access_token]
+
+  Get one patient by id
+
+| Parameter | Type   | Required | Description | Default |
+| --------- | ------ | -------- | ----------- | ------- |
+| id        | string | yes      | Patient id. | none    |
+
+<details>
+<summary>
+Reponse 
+</summary>
+<br>
+
+Status `200 OK`
+
+```json
+{
+  "id_patient": 1,
+  "patient_name": "patient Lorem",
+  "email": "patient_lorem@email.com"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "Patient not found!" }
+```
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid or you are not allowed!"
+}
+```
+
+</details>
+
+#### Create a new patient
+
+##### `/patient`
+
+- **POST** :
+
+```javascript
+`${BASE_URL}/patient`;
+```
+
+Body required:
+
+```json
+{
+  "patient_name": "Patient Lorem",
+  "email": "patient_lorem@email.com",
+  "password": "password123"
+}
+```
+
+| Body parameter | Type   | Required | Description     | Unique |
+| -------------- | ------ | -------- | --------------- | ------ |
+| patient_name   | string | yes      | Patient name    | no     |
+| email          | string | yes      | Patient email   | yes    |
+| password       | string | yes      | Strong password | no     |
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `201 OK`
+
+```json
+{
+  "id_patient": 1,
+  "patient_name": "patient Lorem",
+  "email": "patient_lorem@email.com"
+}
+```
+
+OR
+
+Status `400 Bad request`
+
+```json
+{
+  "message": "Invalid parameters!",
+  "bad_parameters": ["email", "password"]
+}
+```
+
+</details>
+
+#### Edit a patient
+
+##### `/patient/{patientId}`
+
+- **PATCH** :
+
+```javascript
+`${BASE_URL}/patient/{patientId}`;
+```
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+Body required:
+
+```json
+{
+  "patient_name": "Patient Lorem",
+  "email": "patient_lorem@email.com",
+  "password": "password123"
+}
+```
+
+| Body parameter | Type   | Required | Description     | Unique |
+| -------------- | ------ | -------- | --------------- | ------ |
+| patient_name   | string | no       | Patient name    | no     |
+| email          | string | no       | Patient email   | yes    |
+| password       | string | no       | Strong password | no     |
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `200 OK`
+
+```json
+{
+  "id_patient": 1,
+  "patient_name": "Patient Lorem",
+  "email": "patient_lorem@email.com"
+}
+```
+
+OR
+
+Status `400 Bad request`
+
+```json
+{
+  "message": "Invalid parameters!",
+  "bad_parameters": ["email"]
+}
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid!"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "Patient not found!" }
+```
+
+</details>
+
+#### Delete a patient
+
+##### `/patient/{patientId}`
+
+- **DELETE** :
+
+```javascript
+`${BASE_URL}/patient/{patientId}`;
+```
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+Body required:
+
+```
+none
+```
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `204 No Content`
+
+```
+ No Content
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid!"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "patient not found!" }
+```
+
+</details>
+
 ## 🛠️ Install project
 
 1. Clone the repository
