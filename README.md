@@ -48,7 +48,6 @@ npm run dev
 
 <details>
 <summary>
-
 ####🐳 Run with Docker
 </summary>
 
