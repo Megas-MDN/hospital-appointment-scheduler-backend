@@ -19,7 +19,7 @@
 ### Base URL
 
 ```javascript
-const BASE_URL = "http://localhost:3001/v1/api";
+const BASE_URL = "http://localhost:3001/api/v1";
 ```
 
 ### Doctor
@@ -85,7 +85,7 @@ Status `200 OK`
       "email": "doctor_consectetur@email.com"
     }
   ],
-  "totalItems": 100
+  "total": 100
 }
 ```
 
@@ -310,10 +310,6 @@ Status `204 No Content`
 ```
  No Content
 ```
-
-OR
-
-Status `400 Bad request`
 
 OR
 
