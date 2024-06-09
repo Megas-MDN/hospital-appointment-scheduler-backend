@@ -162,7 +162,7 @@ Body required:
 | email          | string | yes      | Doctor email    | yes    |
 | password       | string | yes      | Strong password | no     |
 
-\* From table [medical_specialties]()
+\* From table [medical_specialties](#medical-specialties)
 
 <details>
 <summary>
@@ -227,7 +227,7 @@ Body required:
 | email          | string | no       | Doctor email    | yes    |
 | password       | string | no       | Strong password | no     |
 
-\* From table [medical_specialties]()
+\* From table [medical_specialties](#medical-specialties)
 
 <details>
 <summary>
@@ -650,6 +650,65 @@ Status `404 Not found`
 
 ```json
 { "message": "patient not found!" }
+```
+
+</details>
+
+### Medical Specialties
+
+#### Get all medical specialties
+
+##### `/medical_specialties`
+
+- **GET** :
+
+```javascript
+`${BASE_URL}/medical_specialties?search={search string}&limit={limit number}&page={page number}`;
+```
+
+Get medical specialties
+
+| Parameter | Type   | Required | Description                                   | Default |
+| --------- | ------ | -------- | --------------------------------------------- | ------- |
+| limit     | string | No       | Maximum number of records returned.           | 5       |
+| page      | number | No       | To return records skipping the limit n times. | 0       |
+| search    | string | No       | Part of the name to search for.               | none    |
+
+<details>
+<summary>
+Reponse 
+</summary>
+<br>
+
+Status `200 OK`
+<br>
+
+```json
+{
+  "results": [
+    {
+      "id_specialty": 1,
+      "specialty": "Surgery"
+    },
+    {
+      "id_specialty": 2,
+      "specialty": "Cardiology"
+    },
+    {
+      "id_specialty": 3,
+      "specialty": "Urology"
+    },
+    {
+      "id_specialty": 4,
+      "specialty": "Ophthalmology"
+    },
+    {
+      "id_specialty": 5,
+      "specialty": "Generalist"
+    }
+  ],
+  "total": 10
+}
 ```
 
 </details>
