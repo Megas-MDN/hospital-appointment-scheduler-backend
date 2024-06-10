@@ -22,6 +22,8 @@
 const BASE_URL = "http://localhost:3001/api/v1";
 ```
 
+<hr>
+
 ### Doctor
 
 #### Get all doctors
@@ -330,6 +332,8 @@ Status `404 Not found`
 ```
 
 </details>
+
+<hr>
 
 ### Patient
 
@@ -654,6 +658,8 @@ Status `404 Not found`
 
 </details>
 
+<hr>
+
 ### Medical Specialties
 
 #### Get all medical specialties
@@ -709,6 +715,202 @@ Status `200 OK`
   ],
   "total": 10
 }
+```
+
+</details>
+
+### Appointment
+
+#### Get the first available date available
+
+##### `/appointment`
+
+- **GET** :
+
+```javascript
+`${BASE_URL}/appointment?specialty={specialty id or name}&doctor={doctor id or doctor's name}`;
+```
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+| parameter | Type   | Required | Description                    | Default            |
+| --------- | ------ | -------- | ------------------------------ | ------------------ |
+| specialty | string | no       | Specialty name or specialty id | Medical Generalist |
+| doctor    | string | no       | Doctor id or doctor's name     | none               |
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `200 OK`
+
+```json
+{
+  "id_doctor": 1,
+  "doctor_name": "Doctor Lorem",
+  "specialty": "Generalist",
+  "date": "2024-08-21",
+  "time": "14:00 GMT-0300"
+}
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid!"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "Doctor not found!" }
+```
+
+</details>
+
+##### `/appointment/doctor/{doctorId}`
+
+- **POST** :
+
+```javascript
+`${BASE_URL}/appointment/doctor/{doctorId}`;
+```
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+| parameter | Type   | Required | Description |
+| --------- | ------ | -------- | ----------- |
+| doctorId  | string | yes      | Doctor id   |
+
+Body required:
+
+```json
+{
+  "symptoms": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+}
+```
+
+| Body parameter | Type   | Required | Description                  |
+| -------------- | ------ | -------- | ---------------------------- |
+| symptoms       | string | yes      | Patients send their symptoms |
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `201 OK`
+
+```json
+{
+  "id_appointment": 1,
+  "id_doctor": 1,
+  "doctor_name": "Doctor Lorem",
+  "specialty": "Generalist",
+  "date": "2024-08-21",
+  "time": "14:00 GMT-0300"
+}
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid!"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "Doctor not found!" }
+```
+
+</details>
+
+##### `/appointment/specialty/{specialtyId}`
+
+- **POST** :
+
+```javascript
+`${BASE_URL}/appointment/specialty/{specialtyId}`;
+```
+
+- Headers (application/json)
+
+      Authorization: Bearer [access_token]
+
+| parameter   | Type   | Required | Description  |
+| ----------- | ------ | -------- | ------------ |
+| specialtyId | string | yes      | Specialty id |
+
+Body required:
+
+```json
+{
+  "symptoms": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+}
+```
+
+| Body parameter | Type   | Required | Description                  |
+| -------------- | ------ | -------- | ---------------------------- |
+| symptoms       | string | yes      | Patients send their symptoms |
+
+<details>
+<summary>
+Reponse 
+</summary>
+
+<br>
+
+Status `201 OK`
+
+```json
+{
+  "id_appointment": 1,
+  "id_doctor": 1,
+  "doctor_name": "Doctor Lorem",
+  "specialty": "Generalist",
+  "date": "2024-08-21",
+  "time": "14:00 GMT-0300"
+}
+```
+
+OR
+
+Status `401 Unathorized`
+
+```json
+{
+  "message": "Your token is invalid!"
+}
+```
+
+OR
+
+Status `404 Not found`
+
+```json
+{ "message": "Specialty not found!" }
 ```
 
 </details>
