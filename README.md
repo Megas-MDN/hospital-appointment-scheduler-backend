@@ -3,14 +3,35 @@
 ### Contents
 
 - [Description](#description)
-- [🛠️ Install project](#️-install-project)
-  - [Run with Docker](#run-with-docker)
-- [📦 Environment variables](#-environment-variables)
-- [💻 Built with](#-built-with)
+- [API](#api)
+  - [Base URL](#base-url)
+  - [Doctor](#doctor)
+    - [Get all doctors](#get-all-doctors)
+    - [Get one doctor by id](#get-one-doctor-by-id)
+    - [Create a new doctor](#create-a-new-doctor)
+    - [Edit a doctor](#edit-a-doctor)
+    - [Delete a doctor](#delete-a-doctor)
+  - [Patient](#patient)
+    - [Get all patients](#get-all-patients)
+    - [Get one patient by id](#get-one-patient-by-id)
+    - [Create a new patient](#create-a-new-patient)
+    - [Edit a patient](#edit-a-patient)
+    - [Delete a patient](#delete-a-patient)
+  - [Medical Specialties](#medical-specialties)
+    - [Get all medical specialties](#get-all-medical-specialties)
+  - [Appointment](#appointment)
+    - [Get the first available date available](#get-the-first-available-date-available)
+    - [Create an appointment with a specific doctor](#create-an-appointment-with-a-specific-doctor)
+    - [Create an appointment with a specific specialty](#create-an-appointment-with-a-specific-specialty)
+- [Install project](#-install-project)
+- [Environment variables](#-environment-variables)
+- [Built with](#-built-with)
 
 ---
 
 ## Description
+
+This project is a hospital appointment scheduling system developed to carry out the process of scheduling medical appointments. The patient can enter their symptoms or specify a medical specialization, and the system will find the closest available appointment date with a medical specialist. The system takes into account several factors such as doctor availability, the number of patients and the duration of each consultation. The API provides endpoints for managing doctors, patients, medical specialties, and appointments, designed for the hospital healthcare environment.
 
 <hr>
 
@@ -779,6 +800,8 @@ Status `404 Not found`
 
 </details>
 
+#### Create an appointment with a specific doctor
+
 ##### `/appointment/doctor/{doctorId}`
 
 - **POST** :
@@ -846,6 +869,8 @@ Status `404 Not found`
 ```
 
 </details>
+
+#### Create an appointment with a specific specialty
 
 ##### `/appointment/specialty/{specialtyId}`
 
