@@ -1032,7 +1032,6 @@ To run this project, you will need to add the following environment variables to
 - [Javascript](https://www.w3schools.com/js/js_es6.asp) : Language
 - [Nodejs](https://nodejs.org/en) : Engine
 - [Express](https://expressjs.com/) : Framework api
-- [JWT](https://jwt.io//) : Authentication
 - [Postgresql](https://www.postgresql.org/) : Data base
 - [Jest](https://jestjs.io) : Tests
 - [Docker](https://www.docker.com/) : Containerize
