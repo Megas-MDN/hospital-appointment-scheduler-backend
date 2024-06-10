@@ -434,6 +434,16 @@ Status `401 Unathorized`
 }
 ```
 
+OR
+
+Status `403 Forbidden`
+
+```json
+{
+  "message": "You are not allowed!"
+}
+```
+
 </details>
 
 #### Get one patient by id
@@ -482,11 +492,21 @@ Status `404 Not found`
 { "message": "Patient not found!" }
 ```
 
+OR
+
 Status `401 Unathorized`
 
 ```json
 {
-  "message": "Your token is invalid or you are not allowed!"
+  "message": "Your token is invalid!"
+}
+```
+
+Status `403 Forbidden`
+
+```json
+{
+  "message": "You are not allowed!"
 }
 ```
 
