@@ -997,9 +997,13 @@ docker compose down
 
 To run this project, you will need to add the following environment variables to your .env file.
 
-`xxxx`= Backend.
-
-`xxxx`= Socket server
+`PORT`= 3001
+`JWT_SECRET`= JWT_SECRET
+`DB_HOST`= db
+`DB_USER`= postgres
+`DB_PORT`= 5432
+`DB_DATABASE`= postgres
+`DB_PASSWORD`= password
 
 🌟 Ready to use!
 
