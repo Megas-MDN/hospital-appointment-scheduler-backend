@@ -23,7 +23,7 @@
     - [Get the first available date available](#get-the-first-available-date-available)
     - [Create an appointment with a specific doctor](#create-an-appointment-with-a-specific-doctor)
     - [Create an appointment with a specific specialty](#create-an-appointment-with-a-specific-specialty)
-- [Install project](#-install-project)
+- [Install project](#-Install-project)
 - [Environment variables](#-environment-variables)
 - [Built with](#-built-with)
 
@@ -1018,11 +1018,17 @@ docker compose down
 To run this project, you will need to add the following environment variables to your .env file.
 
 `PORT`= 3001
+
 `JWT_SECRET`= JWT_SECRET
+
 `DB_HOST`= db
+
 `DB_USER`= postgres
+
 `DB_PORT`= 5432
+
 `DB_DATABASE`= postgres
+
 `DB_PASSWORD`= password
 
 🌟 Ready to use!
