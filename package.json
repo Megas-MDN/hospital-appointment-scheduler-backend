@@ -1,0 +1,27 @@
+{
+  "name": "hospital-appointment-scheduler-backend",
+  "author": "Megas Melquisedeque Damasceno",
+  "repository": "https://github.com/Megas-MDN/hospital-appointment-scheduler-backend.git",
+  "authorUrl": "https://github.com/Megas-MDN",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node --env-file .env src/index.js",
+    "dev": "node --env-file .env --watch src/index.js"
+  },
+  "keywords": [
+    "hospital",
+    "doctor",
+    "scheduling",
+    "matching",
+    "symptoms"
+  ],
+  "description": "A system for scheduling hospital appointments based on symptoms or specialization, considering doctor availability and patient load.",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
