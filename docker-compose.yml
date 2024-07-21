@@ -1,0 +1,38 @@
+services:
+  api:
+    build: .
+    container_name: my-api
+    restart: always
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=hospital_appointment_scheduler
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - NODE_ENV=${NODE_ENV}
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    entrypoint: sh -c "if [ \"$NODE_ENV\" = 'development' ]; then npm run dev; else npm start; fi"
+
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    container_name: my-db-api
+    restart: always
+    environment:
+      POSTGRES_DB: hospital_appointment_scheduler
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
+volumes:
+  pgdata:
