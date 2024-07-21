@@ -17,11 +17,14 @@ const compareHashPassword = async (password, hash) => {
 };
 
 export const goLoginService = async ({ userEmail, password }) => {
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   const isValid = validateData({
     data: { userEmail, password },
     schema: { userEmail: "string", password: "string" },
   });
+
   if (isValid.error) return isValid;
+
   const user = await model.goLoginModel({ userEmail });
   if (!user) return { error: true, status: 404, message: "User not found" };
 

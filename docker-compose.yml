@@ -16,7 +16,6 @@ services:
       - .:/app
     depends_on:
       - db
-    entrypoint: sh -c "if [ \"$NODE_ENV\" = 'development' ]; then npm run dev; else npm start; fi"
 
   db:
     build:
