@@ -1,5 +1,5 @@
 import { app } from "./app.js";
-import { createTables } from "./database/conection.js";
+import { createTables } from "./database/connection.js";
 
 const PORT = process.env.PORT || "3001";
 
