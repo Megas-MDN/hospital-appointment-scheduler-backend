@@ -46,9 +46,7 @@ export const handlerToken = (
     },
     decode: (str) => {
       const jwtArr = str.split(".");
-      const head = jwtArr[0];
-      const body = jwtArr[1];
-      const hash = jwtArr[2];
+      const [head, body, hash] = jwtArr;
       const checkSum = checkSumGen(head, body);
 
       if (hash === checkSum) {
