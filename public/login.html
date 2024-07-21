@@ -14,46 +14,64 @@
 
 <body class="flex flex-col justify-center items-center h-screen w-screen p-5 bg-slate-300">
   <h1 class="text-3xl mb-5">My Login</h1>
-  <form class="login-form flex flex-col bg-gray-400 p-5 rounded-lg md:w-2/3 w-full gap-5 justify-between shadow-2xl"
+  <form class="login-form flex flex-col bg-gray-400 p-5 rounded-lg md:w-2/3 w-full gap-5 justify-between shadow-2xl
+  max-w-[400px]
+  "
     hx-trigger="submit"
     hx-post="/login"
     hx-target="#token"
-    hx-indicator="#loading"
-    hx-ext="json-enc">
+    hx-indicator="#loading">
     <label for="email"
       class="flex justify-between gap-2  items-center">
-      Email:
+      <p class="w-full max-w-[70px]">
+        Email:
+      </p>
       <input type="email"
         name="userEmail"
         required
-        class="w-full px-2 py-1" />
+        class="w-full px-2 py-1 rounded" />
     </label>
     <labe for="password"
-      class="flex justify-between gap-2 items-center">
-      Password:
+      class="flex justify-between gap-2 items-center ">
+      <p class="w-full max-w-[70px]">
+        Password:
+      </p>
       <input type="password"
         name="password"
         required
-        class="w-full px-2 py-1" />
+        class="w-full px-2 py-1 rounded" />
     </labe>
-    <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit self-center"
+    <button class="btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-fit self-end shadow-xl"
       type="submit">Login</button>
   </form>
 
-  <div class="loader htmx-indicator"
-    id="loading"></div>
+  <div class="loader-container htmx-indicator"
+    id="loading">
+    <div class="loader"></div>
+  </div>
 
   <div id="token"
-    class="max-w-full break-all"></div>
+    class="max-w-full break-all my-5"></div>
   <style>
-    .loader-container {
+    .htmx-indicator {
+      display: none;
+    }
+
+    .htmx-request .htmx-indicator {
       display: flex;
+    }
+
+    .htmx-request.htmx-indicator {
+      display: flex;
+    }
+
+    .loader-container {
       justify-content: center;
       align-items: center;
       position: absolute;
       width: 100%;
       height: 100vh;
-      z-index: -1;
+      z-index: 10;
       background-color: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(2px);
     }
