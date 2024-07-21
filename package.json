@@ -7,7 +7,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node --env-file .env src/index.js",
-    "dev": "node --env-file .env --watch src/index.js"
+    "dev": "node --env-file .env --watch src/index.js",
+    "dc:up": "docker compose up -d",
+    "dc:down": "docker compose down --remove-orphans",
+    "log": "docker compose logs -f api"
   },
   "keywords": [
     "hospital",

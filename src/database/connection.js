@@ -3,8 +3,8 @@ import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const filePathTables = join(__dirname, "create-tables.sql");
-const filePathSeeds = join(__dirname, "seeds.sql");
+const filePathTables = join(__dirname, "sql", "create-tables.sql");
+const filePathSeeds = join(__dirname, "sql", "seeds.sql");
 
 const pgpConection = pgp();
 
