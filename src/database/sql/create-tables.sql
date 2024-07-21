@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS medical_specialties (
     id_specialty SERIAL PRIMARY KEY,
     specialty VARCHAR(100) UNIQUE,
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
@@ -12,16 +12,16 @@ CREATE TABLE IF NOT EXISTS doctor (
     id_specialty INT REFERENCES medical_specialties (id_specialty),
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS day_of_week (
     id_day_of_week SERIAL PRIMARY KEY,
     day VARCHAR(10) UNIQUE,
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
@@ -33,8 +33,8 @@ CREATE TABLE IF NOT EXISTS availability (
     end_time TIMESTAMP,
     appointment_time INT,
     recurrent BOOLEAN,
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS blockers (
     all_day BOOLEAN,
     start_time TIMESTAMP,
     end_time TIMESTAMP,
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS patient (
     patient_name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     password VARCHAR(255),
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS appointment (
     symptoms VARCHAR(255),
     date DATE,
     time TIME,
-    create_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    update_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_date TIMESTAMP
 );
