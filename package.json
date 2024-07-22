@@ -17,7 +17,8 @@
     "doctor",
     "scheduling",
     "matching",
-    "symptoms"
+    "symptoms",
+    "htmx"
   ],
   "description": "A system for scheduling hospital appointments based on symptoms or specialization, considering doctor availability and patient load.",
   "license": "MIT",
