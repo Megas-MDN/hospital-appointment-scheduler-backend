@@ -3,6 +3,7 @@
 ### Contents
 
 - [Description](#description)
+- [Schema](#schema)
 - [API](#api)
   - [Base URL](#base-url)
   - [Doctor](#doctor)
@@ -34,6 +35,10 @@
 This project is a hospital appointment scheduling system developed to carry out the process of scheduling medical appointments. The patient can enter their symptoms or specify a medical specialization, and the system will find the closest available appointment date with a medical specialist. The system takes into account several factors such as doctor availability, the number of patients and the duration of each consultation. The API provides endpoints for managing doctors, patients, medical specialties, and appointments, designed for the hospital healthcare environment.
 
 <hr>
+
+## Schema
+
+![Schema](./SchemaDB.drawio.png)
 
 ## API
 
