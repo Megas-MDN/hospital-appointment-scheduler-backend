@@ -44,6 +44,6 @@ export const getAllDoctorsController = async (req, res, next) => {
 export const findDoctorByIdController = async (req, res, next) => {
   const { id_doctor } = req.params;
   const response = await service.findDoctorByIdService(id_doctor);
-  if (response.error) return next(response);
+  if (response?.error) return next(response);
   res.status(200).json(response);
 };
