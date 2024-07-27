@@ -1,4 +1,5 @@
 import * as service from "../services/login.services.js";
+import { STATUS_CODE } from "../utils/StatusCode.js";
 
 export const homeLoginController = (_req, res) => {
   const home = service.homeLoginService();
@@ -11,5 +12,5 @@ export const goLoginController = async (req, res, next) => {
   const userToken = await service.goLoginService({ userEmail, password });
   if (userToken.error) return next(userToken);
 
-  return res.status(200).json(userToken);
+  return res.status(STATUS_CODE.OK).json(userToken);
 };

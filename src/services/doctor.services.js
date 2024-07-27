@@ -2,6 +2,8 @@ import * as model from "../models/doctor.models.js";
 import * as modelSpecialty from "../models/specialty.models.js";
 import * as handlerPassword from "../utils/handlePassword.js";
 import { handlerToken } from "../utils/myJWT.js";
+import { STATUS_CODE } from "../utils/StatusCode.js";
+import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
 import { validateData } from "../utils/validateData.js";
 
 const doctorSchema = {
@@ -22,7 +24,11 @@ export const findDoctorByIdService = async (id) => {
 export const createDoctorService = async (data) => {
   const oldUser = await findDoctorByEmailService(data.email);
   if (oldUser)
-    return { error: true, message: "User already exists", status: 400 };
+    return {
+      error: true,
+      message: ERROR_MESSAGE.USER_ALREADY_EXISTS,
+      status: STATUS_CODE.BAD_REQUEST,
+    };
   if (oldUser?.error) return oldUser;
   const isValid = validateData({
     data,
@@ -33,7 +39,11 @@ export const createDoctorService = async (data) => {
     data.id_specialty,
   );
   if (!specialty)
-    return { error: true, message: "Specialty not found", status: 404 };
+    return {
+      error: true,
+      message: ERROR_MESSAGE.SPECIALTY_NOT_FOUND,
+      status: STATUS_CODE.NOT_FOUND,
+    };
   if (specialty?.error) return specialty;
   const { doctor_name, id_specialty, email, password } = data;
   const hashPassword = await handlerPassword.genHashPassword(password);
@@ -57,14 +67,23 @@ export const doctorLoginService = async ({ email, password }) => {
 
   if (isValid.error) return isValid;
   const user = await model.findDoctorByEmailWithPasswordModel(email);
-  if (!user) return { error: true, status: 404, message: "User not found" };
+  if (!user)
+    return {
+      error: true,
+      status: STATUS_CODE.NOT_FOUND,
+      message: ERROR_MESSAGE.USER_NOT_FOUND,
+    };
   if (user?.error) return user;
   const match = await handlerPassword.compareHashPassword(
     password,
     user.password,
   );
   if (!match)
-    return { error: true, status: 400, message: "Invalid email or password" };
+    return {
+      error: true,
+      status: STATUS_CODE.BAD_REQUEST,
+      message: ERROR_MESSAGE.INVALID_PASSWORD_OR_EMAIL,
+    };
   const genToken = handlerToken();
   const token = genToken.encode({ id_doctor: user.id_doctor, email });
   return { token };
@@ -73,10 +92,15 @@ export const doctorLoginService = async ({ email, password }) => {
 export const doctorUpdateService = async (data, userLogged) => {
   const { id_doctor, doctor_name, id_specialty, email, password } = data;
   const user = await model.findDoctorByIdModel(id_doctor);
-  if (!user) return { error: true, status: 404, message: "User not found" };
+  if (!user)
+    return {
+      error: true,
+      status: STATUS_CODE.NOT_FOUND,
+      message: ERROR_MESSAGE.USER_NOT_FOUND,
+    };
   if (user.error) return user;
   if (userLogged?.id_doctor !== user.id_doctor)
-    return { error: true, status: 403, message: "Forbidden" };
+    return { error: true, status: STATUS_CODE.FORBIDDEN, message: "Forbidden" };
   const isValid = validateData({
     data: { doctor_name, id_specialty, email, password },
     schema: doctorSchema,
@@ -87,7 +111,11 @@ export const doctorUpdateService = async (data, userLogged) => {
     const specialty = await modelSpecialty.findSpecialtyByIdModel(id_specialty);
     if (specialty?.error) return specialty;
     if (!specialty)
-      return { error: true, message: "Specialty not found", status: 404 };
+      return {
+        error: true,
+        message: ERROR_MESSAGE.SPECIALTY_NOT_FOUND,
+        status: STATUS_CODE.NOT_FOUND,
+      };
   }
   const hashPassword = !!password
     ? await handlerPassword.genHashPassword(password)
@@ -105,10 +133,15 @@ export const doctorUpdateService = async (data, userLogged) => {
 
 export const doctorDeleteService = async (id, userLogged) => {
   const user = await model.findDoctorByIdModel(id);
-  if (!user) return { error: true, status: 404, message: "User not found" };
+  if (!user)
+    return {
+      error: true,
+      status: STATUS_CODE.NOT_FOUND,
+      message: ERROR_MESSAGE.USER_NOT_FOUND,
+    };
   if (user.error) return user;
   if (userLogged?.id_doctor !== user.id_doctor)
-    return { error: true, status: 403, message: "Forbidden" };
+    return { error: true, status: STATUS_CODE.FORBIDDEN, message: "Forbidden" };
   const response = await model.deleteDoctorModel(id);
   if (response.error) return response;
   return response;
