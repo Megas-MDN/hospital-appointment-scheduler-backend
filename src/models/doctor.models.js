@@ -71,10 +71,11 @@ export const deleteDoctorModel = async (id) => {
 };
 
 export const getAllDoctorsModel = async (filter) => {
-  const limit = filter.limit ?? 5;
-  const page = filter.page ?? 0;
-  const search = filter.search ?? "";
+  const limit = filter.limit || 5;
+  const page = filter.page || 0;
+  const search = filter.search || "";
   const offset = page * limit;
+
   try {
     const response = await db.query(
       `SELECT id_doctor, doctor_name, id_specialty, email FROM doctor WHERE LOWER(doctor_name) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,

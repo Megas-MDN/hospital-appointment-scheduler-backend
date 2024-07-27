@@ -72,9 +72,9 @@ export const deletePatientModel = async (id) => {
 };
 
 export const getAllPatientsModel = async (filter) => {
-  const limit = filter.limit ?? 5;
-  const page = filter.page ?? 0;
-  const search = filter.search ?? "";
+  const limit = filter.limit || 5;
+  const page = filter.page || 0;
+  const search = filter.search || "";
   const offset = page * limit;
   try {
     const response = await db.query(

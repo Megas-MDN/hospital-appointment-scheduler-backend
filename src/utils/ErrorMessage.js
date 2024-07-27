@@ -7,4 +7,5 @@ export const ERROR_MESSAGE = {
   SERVER_ERROR: "Internal server error",
   SPECIALTY_NOT_FOUND: "Specialty not found",
   FORBIDDEN: "Forbidden",
+  UNAUTHORIZED: "Unauthorized",
 };

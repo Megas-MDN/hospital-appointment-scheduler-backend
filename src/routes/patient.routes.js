@@ -6,9 +6,10 @@ import { auth } from "../middlewares/auth.js";
 const BASE_PATH = ROOT_PATH.PATIENT;
 export const patientRoutes = Router();
 
-patientRoutes.get(`${BASE_PATH}`, controller.getAllPatientsController);
+patientRoutes.get(`${BASE_PATH}`, auth, controller.getAllPatientsController);
 patientRoutes.get(
   `${BASE_PATH}/:id_patient`,
+  auth,
   controller.findPatientByIdController,
 );
 patientRoutes.patch(
