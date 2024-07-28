@@ -8,4 +8,8 @@ export const ERROR_MESSAGE = {
   SPECIALTY_NOT_FOUND: "Specialty not found",
   FORBIDDEN: "Forbidden",
   UNAUTHORIZED: "Unauthorized",
+  DAY_OF_WEEK_NOT_FOUND: "Day of week not found",
+  AVAILABILITY_NOT_FOUND: "Availability not found",
+  AVAILABILITY_EXPIRED: "Availability expired",
+  AVAILABILITY_ALREADY_EXISTS: "Availability already exists",
 };

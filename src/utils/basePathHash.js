@@ -3,4 +3,5 @@ export const ROOT_PATH = {
   REGISTER: "/register",
   DOCTOR: "/doctor",
   PATIENT: "/patient",
+  AVAILABILITY: "/availability",
 };
