@@ -56,6 +56,7 @@ export const getAllAvailabilitiesModel = async (filter = {}) => {
           ? `AND d.id_specialty = $5`
           : `AND LOWER(ms.specialty) LIKE LOWER($3)`
       }
+      AND a.start_time + (a.appointment_time || ' minutes')::INTERVAL <= a.end_time
       ORDER BY
       ${makeCaseSql()}
       LIMIT $1 OFFSET $2;
