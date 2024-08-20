@@ -41,7 +41,11 @@ export const createPatientService = async (data) => {
     passwordHash: hashPassword,
   });
   const genToken = handlerToken();
-  const token = genToken.encode({ id_patient: user.id_patient, email });
+  const token = genToken.encode({
+    id_patient: user.id_patient,
+    email,
+    patient_name: user.patient_name,
+  });
   delete user.password;
   return { token, user };
 };
@@ -72,7 +76,11 @@ export const patientLoginService = async ({ email, password }) => {
       message: ERROR_MESSAGE.INVALID_PASSWORD_OR_EMAIL,
     };
   const genToken = handlerToken();
-  const token = genToken.encode({ id_patient: user.id_patient, email });
+  const token = genToken.encode({
+    id_patient: user.id_patient,
+    email,
+    patient_name: user.patient_name,
+  });
   return { token };
 };
 

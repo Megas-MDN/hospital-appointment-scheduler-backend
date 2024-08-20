@@ -22,6 +22,7 @@ export const getNextAvailableAppointmentsService = async ({
     specialty: response.specialty,
     date: nextDate.toISOString().split("T")[0],
     time: response.start_time,
+    id_availability: response.id_availability,
   };
 };
 
@@ -31,10 +32,23 @@ export const scheduleAppointmentService = async ({
   doctor,
   symptoms,
 } = {}) => {
-  return await model.scheduleAppointmentModel({
-    user,
-    symptoms,
+  const availability = await getNextAvailableAppointmentsService({
     specialty,
     doctor,
   });
+
+  if (availability.error) return availability;
+
+  const appointment = {
+    id_availability: availability.id_availability,
+    id_doctor: availability.id_doctor,
+    id_patient: user.id_patient,
+    doctor_name: availability.doctor_name,
+    patient_name: user.patient_name,
+    symptoms,
+    date: availability.date,
+    time: availability.time,
+  };
+
+  return await model.scheduleAppointmentModel(appointment);
 };

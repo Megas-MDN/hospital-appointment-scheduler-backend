@@ -91,7 +91,7 @@ export const getAllPatientsModel = async (filter) => {
 export const findPatientByEmailWithPasswordModel = async (email) => {
   try {
     const [response] = await db.query(
-      "SELECT id_patient, password FROM patient WHERE email = $1 AND deleted_date IS NULL",
+      "SELECT id_patient, password, patient_name, email FROM patient WHERE email = $1 AND deleted_date IS NULL",
       [email],
     );
     return response;

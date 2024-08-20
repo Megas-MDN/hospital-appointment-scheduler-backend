@@ -7,11 +7,6 @@ export const homeLoginService = () => {
   return model.homeLoginModel();
 };
 
-const genHashPassword = async (password) => {
-  const salt = await bcrypt.genSalt(12);
-  return bcrypt.hash(password, salt);
-};
-
 const compareHashPassword = async (password, hash) => {
   return bcrypt.compare(password, hash);
 };

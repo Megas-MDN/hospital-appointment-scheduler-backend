@@ -42,6 +42,6 @@ export const scheduleAppointmentBySpecialtyController = async (
     symptoms,
     specialty: Number(id_specialty),
   });
-  if (response.error) return next(response);
+  if (response?.error) return next(response);
   return res.status(STATUS_CODE.OK).json(response);
 };
