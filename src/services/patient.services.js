@@ -106,7 +106,7 @@ export const patientUpdateService = async (data, userLogged) => {
     optional: { all: true },
   });
   if (isValid.error) return isValid;
-  const hashPassword = !!password
+  const hashPassword = password
     ? await handlerPassword.genHashPassword(password)
     : undefined;
   const response = await model.updatePatientModel({

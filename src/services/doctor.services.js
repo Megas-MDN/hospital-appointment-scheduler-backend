@@ -117,7 +117,7 @@ export const doctorUpdateService = async (data, userLogged) => {
         status: STATUS_CODE.NOT_FOUND,
       };
   }
-  const hashPassword = !!password
+  const hashPassword = password
     ? await handlerPassword.genHashPassword(password)
     : undefined;
   const response = await model.updateDoctorModel({
