@@ -89,6 +89,7 @@ const updateAvailabilityService = async (data, userLogged) => {
       message: ERROR_MESSAGE.AVAILABILITY_NOT_FOUND,
       status: STATUS_CODE.NOT_FOUND,
     };
+
   if (oldAvailability.id_doctor !== userLogged.id_doctor)
     return {
       error: true,
@@ -121,6 +122,7 @@ const updateAvailabilityService = async (data, userLogged) => {
       };
     if (dayOfWeekData?.error) return dayOfWeekData;
   }
+
   const {
     id_availability,
     id_doctor,

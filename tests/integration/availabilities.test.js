@@ -17,7 +17,7 @@ jest.mock("../../src/database/connection.js", () => {
 
 const availabilityNotRecurrent = {
   id_availability: 6,
-  id_doctor: 2,
+  id_doctor: 1,
   id_day_of_week: 2,
   start_time: "09:00:00",
   end_time: "18:00:00",
@@ -31,7 +31,7 @@ const availabilityNotRecurrent = {
 const availabilityMock = [
   {
     id_availability: 5,
-    id_doctor: 3,
+    id_doctor: 1,
     id_day_of_week: 3,
     start_time: "09:00:00",
     end_time: "18:00:00",
@@ -64,7 +64,7 @@ describe("Appointment", () => {
     });
   });
 
-  it.skip("GET - getAllAvailabilitiesController", async () => {
+  it("GET - getAllAvailabilitiesController", async () => {
     const { db } = require("../../src/database/connection.js");
     db.query.mockResolvedValueOnce([availabilityNotRecurrent]);
     db.query.mockResolvedValueOnce([]);
@@ -109,33 +109,58 @@ describe("Appointment", () => {
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty("id_availability", 10);
   });
-  it("PATCH - updateAvailabilityController", async () => {});
-  it("DELETE - deleteAvailabilityController", async () => {});
+
+  it("PATCH - Availability expired updateAvailabilityController", async () => {
+    const { db } = require("../../src/database/connection.js");
+
+    db.query.mockResolvedValueOnce([availabilityNotRecurrent]);
+    db.query.mockResolvedValueOnce([]);
+
+    const response = await supertest(app)
+      .patch(`${BASE_PATH}/2`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        id_day_of_week: 5,
+        start_time: "09:00:00",
+        end_time: "18:00:00",
+        appointment_time: 20,
+        recurrent: true,
+      });
+
+    expect(response.status).toBe(400);
+    expect(response.body).toMatchObject({ message: "Availability expired" });
+  });
+
+  it("PATCH - updateAvailabilityController", async () => {
+    const { db } = require("../../src/database/connection.js");
+
+    db.query.mockResolvedValueOnce(availabilityMock);
+    db.query.mockResolvedValueOnce([dayOfWeek]);
+    db.query.mockResolvedValueOnce(availabilityMock);
+
+    const response = await supertest(app)
+      .patch(`${BASE_PATH}/2`)
+      .set("Authorization", `Bearer ${token}`)
+      .send({
+        id_day_of_week: 5,
+        start_time: "09:00:00",
+        end_time: "18:00:00",
+        appointment_time: 20,
+        recurrent: true,
+      });
+
+    expect(response.status).toBe(200);
+    expect(response.body).toMatchObject(availabilityMock[0]);
+  });
+
+  it("DELETE - deleteAvailabilityController", async () => {
+    const { db } = require("../../src/database/connection.js");
+    db.query.mockResolvedValueOnce(availabilityMock);
+    db.query.mockResolvedValueOnce(availabilityMock);
+    const response = await supertest(app)
+      .delete(`${BASE_PATH}/2`)
+      .set("Authorization", `Bearer ${token}`)
+      .send();
+    expect(response.status).toBe(200);
+  });
 });
-
-/*
-
-availabilityRoutes.get(
-  `${BASE_PATH}`,
-  controller.getAllAvailabilitiesController,
-);
-
-availabilityRoutes.post(
-  `${BASE_PATH}`,
-  auth,
-  controller.createAvailabilityController,
-);
-
-availabilityRoutes.patch(
-  `${BASE_PATH}/:id_availability`,
-  auth,
-  controller.updateAvailabilityController,
-);
-
-availabilityRoutes.delete(
-  `${BASE_PATH}/:id_availability`,
-  auth,
-  controller.deleteAvailabilityController,
-);
-
-*/

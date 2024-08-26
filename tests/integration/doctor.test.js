@@ -68,7 +68,6 @@ describe("Doctor", () => {
     expect(response.body).toHaveProperty("token");
   });
 
-  // created new doctor
   it("should return 201", async () => {
     const { db } = require("../../src/database/connection.js");
     db.query.mockResolvedValueOnce([]);
