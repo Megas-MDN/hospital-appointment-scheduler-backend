@@ -24,7 +24,7 @@ const createAvailabilityModel = async (data) => {
     );
     return { ...data, id_availability: response.id_availability };
   } catch (error) {
-    console.log(error, "Error = require(createAvailabilityModel");
+    console.log(error, "Error from createAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
@@ -39,7 +39,7 @@ const getAllAvailabilitiesModel = async (filter = {}) => {
     const response = await db.query(
       `SELECT a.id_availability, a.id_doctor, a.id_day_of_week, a.start_time, a.end_time, a.appointment_time, a.recurrent, 
        d.doctor_name, d.email, ms.specialty, dow.day 
-      = require(availability a
+      from availability a
       LEFT JOIN doctor d ON d.id_doctor = a.id_doctor
       LEFT JOIN medical_specialties ms ON ms.id_specialty = d.id_specialty
       LEFT JOIN day_of_week dow ON dow.id_day_of_week = a.id_day_of_week
@@ -72,7 +72,7 @@ const getAllAvailabilitiesModel = async (filter = {}) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllAvailabilitiesModel");
+    console.log(error, "Error from getAllAvailabilitiesModel");
     return { error: true, message: error.message };
   }
 };
@@ -85,7 +85,7 @@ const deleteAvailabilityModel = async (id_availability) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(deleteAvailabilityModel");
+    console.log(error, "Error from deleteAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
@@ -100,7 +100,7 @@ const updateAvailabilityModel = async (data) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(updateAvailabilityModel");
+    console.log(error, "Error from updateAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
@@ -116,10 +116,7 @@ const findAvailabilityByIdDoctorIdDayOfWeekModel = async (
     );
     return response;
   } catch (error) {
-    console.log(
-      error,
-      "Error = require(findAvailabilityByIdDoctorIdDayOfWeekModel",
-    );
+    console.log(error, "Error from findAvailabilityByIdDoctorIdDayOfWeekModel");
     return { error: true, message: error.message };
   }
 };
@@ -132,7 +129,7 @@ const getAvailabilityByIdModel = async (id_availability) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAvailabilityByIdModel");
+    console.log(error, "Error from getAvailabilityByIdModel");
     return { error: true, message: error.message };
   }
 };
@@ -145,7 +142,7 @@ const deleteExpiredAvailabilitiesModel = async (availabilities) => {
       }),
     );
   } catch (error) {
-    console.log(error, "Error = require(deleteExpiredAvailabilitiesModel");
+    console.log(error, "Error from deleteExpiredAvailabilitiesModel");
     return { error: true, message: error.message };
   }
 };
@@ -154,14 +151,14 @@ const getAllNotRecorrentAvailabilitiesModel = async () => {
   try {
     const response = await db.query(
       `SELECT * 
-       = require(availability 
+       from availability 
        WHERE (recurrent = false OR recurrent IS NULL)
        AND deleted_date IS NULL
        AND created_date < CURRENT_DATE;`,
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllNotRecorrentAvailabilitiesModel");
+    console.log(error, "Error from getAllNotRecorrentAvailabilitiesModel");
     return { error: true, message: error.message };
   }
 };

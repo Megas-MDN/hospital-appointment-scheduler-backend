@@ -10,7 +10,7 @@ const createPatientModel = async (data) => {
 
     return response;
   } catch (error) {
-    console.log(error, "Error = require(createPatientModel");
+    console.log(error, "Error from createPatientModel");
     return { error: true, message: error.message };
   }
 };
@@ -18,12 +18,12 @@ const createPatientModel = async (data) => {
 const findPatientByEmailModel = async (email) => {
   try {
     const [response] = await db.query(
-      "SELECT id_patient, patient_name, email = require(patient WHERE email = $1 AND deleted_date IS NULL",
+      "SELECT id_patient, patient_name, email from patient WHERE email = $1 AND deleted_date IS NULL",
       [email],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(findPatientByEmailModel");
+    console.log(error, "Error from findPatientByEmailModel");
     return { error: true, message: error.message };
   }
 };
@@ -31,12 +31,12 @@ const findPatientByEmailModel = async (email) => {
 const findPatientByIdModel = async (id) => {
   try {
     const [response] = await db.query(
-      "SELECT id_patient, patient_name, email = require(patient WHERE id_patient = $1 AND deleted_date IS NULL",
+      "SELECT id_patient, patient_name, email from patient WHERE id_patient = $1 AND deleted_date IS NULL",
       [id],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(findPatientByIdModel");
+    console.log(error, "Error from findPatientByIdModel");
     return { error: true, message: error.message };
   }
 };
@@ -53,7 +53,7 @@ const updatePatientModel = async (data) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(updatePatientModel");
+    console.log(error, "Error from updatePatientModel");
     return { error: true, message: error.message };
   }
 };
@@ -66,7 +66,7 @@ const deletePatientModel = async (id) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(deletePatientModel");
+    console.log(error, "Error from deletePatientModel");
     return { error: true, message: error.message };
   }
 };
@@ -78,12 +78,12 @@ const getAllPatientsModel = async (filter) => {
   const offset = page * limit;
   try {
     const response = await db.query(
-      `SELECT id_patient, patient_name, email = require(patient WHERE LOWER(patient_name) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
+      `SELECT id_patient, patient_name, email from patient WHERE LOWER(patient_name) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
       [limit, offset, `%${search}%`],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllPatientsModel");
+    console.log(error, "Error from getAllPatientsModel");
     return { error: true, message: error.message };
   }
 };
@@ -91,12 +91,12 @@ const getAllPatientsModel = async (filter) => {
 const findPatientByEmailWithPasswordModel = async (email) => {
   try {
     const [response] = await db.query(
-      "SELECT id_patient, password, patient_name, email = require(patient WHERE email = $1 AND deleted_date IS NULL",
+      "SELECT id_patient, password, patient_name, email from patient WHERE email = $1 AND deleted_date IS NULL",
       [email],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(findPatientByEmailWithPasswordModel");
+    console.log(error, "Error from findPatientByEmailWithPasswordModel");
     return { error: true, message: error.message };
   }
 };

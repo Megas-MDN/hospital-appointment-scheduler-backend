@@ -8,7 +8,7 @@ const findSpecialtyByIdModel = async (id) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(findSpecialtyByIdModel");
+    console.log(error, "Error from findSpecialtyByIdModel");
     return { error: true, message: error.message };
   }
 };
@@ -26,7 +26,7 @@ const getAllSpecialtyByIdModel = async (filter) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllSpecialtyByIdModel");
+    console.log(error, "Error from getAllSpecialtyByIdModel");
     return { error: true, message: error.message };
   }
 };

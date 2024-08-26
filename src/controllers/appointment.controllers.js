@@ -22,7 +22,7 @@ const scheduleAppointmentByDoctorController = async (req, res, next) => {
     doctor: Number(id_doctor),
   });
   if (response.error) return next(response);
-  return res.status(STATUS_CODE.OK).json(response);
+  return res.status(STATUS_CODE.CREATED).json(response);
 };
 
 const scheduleAppointmentBySpecialtyController = async (req, res, next) => {
@@ -35,7 +35,7 @@ const scheduleAppointmentBySpecialtyController = async (req, res, next) => {
     specialty: Number(id_specialty),
   });
   if (response?.error) return next(response);
-  return res.status(STATUS_CODE.OK).json(response);
+  return res.status(STATUS_CODE.CREATED).json(response);
 };
 
 module.exports = {

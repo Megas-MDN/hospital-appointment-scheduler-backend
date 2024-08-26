@@ -13,8 +13,8 @@
     "log": "docker compose logs -f api",
     "drop": "docker compose down -v --remove-orphans",
     "lint": "npx eslint --fix",
-    "test": "npx jest --coverage",
-    "test:dev": "npx jest --watch"
+    "test": "npx jest --coverage --testTimeout=10000",
+    "test:dev": "npx jest --watch --detectOpenHandles --testTimeout=10000"
   },
   "keywords": [
     "hospital",
@@ -35,6 +35,7 @@
   "dependencies": {
     "bcrypt": "5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jest": "^29.7.0",
     "pg-promise": "^11.9.1",

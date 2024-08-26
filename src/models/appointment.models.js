@@ -56,7 +56,7 @@ const scheduleAppointmentModel = async (data) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(scheduleAppointmentModel");
+    console.log(error, "Error from scheduleAppointmentModel");
     return { error: true, message: error.message };
   }
 };

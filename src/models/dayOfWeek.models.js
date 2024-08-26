@@ -8,7 +8,7 @@ const findDayOfWeekByIdModel = async (id) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(findDayOfWeekByIdModel");
+    console.log(error, "Error from findDayOfWeekByIdModel");
     return { error: true, message: error.message };
   }
 };
@@ -16,11 +16,11 @@ const findDayOfWeekByIdModel = async (id) => {
 const getAllDayOfWeekModel = async () => {
   try {
     const response = await db.query(
-      "SELECT  * from day_of_week WHERE deleted_date IS NULL ",
+      "SELECT * from day_of_week WHERE deleted_date IS NULL ",
     );
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllDayOfWeekModel");
+    console.log(error, "Error from getAllDayOfWeekModel");
     return { error: true, message: error.message };
   }
 };
