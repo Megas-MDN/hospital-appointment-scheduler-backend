@@ -15,16 +15,6 @@ jest.mock("../../src/database/connection.js", () => {
   };
 });
 
-const specialty = [
-  {
-    id_specialty: 5,
-    specialty: "Generalist",
-    created_date: "2024-07-28 01:55:18.221748",
-    updated_date: "2024-07-28 01:55:18.221748",
-    deleted_date: null,
-  },
-];
-
 describe("Patient", () => {
   beforeAll(() => {
     const genToken = handlerToken();
@@ -123,6 +113,53 @@ describe("Patient", () => {
     const { db } = require("../../src/database/connection.js");
     db.query.mockResolvedValueOnce(mockPatients);
     const response = await supertest(app).get("/api/v1/patient");
+
+    expect(response.status).toBe(401);
+    expect(response.body).toEqual({ message: "Unauthorized" });
+  });
+
+  it("should return 401 not authorized without token", async () => {
+    const mockPatients = [
+      {
+        id_patient: 1,
+        patient_name: "Patient Tuffy",
+        id_specialty: 5,
+        email: "test@test2.com",
+      },
+    ];
+    const { db } = require("../../src/database/connection.js");
+    db.query.mockResolvedValueOnce(mockPatients);
+    const response = await supertest(app).get("/api/v1/patient").set({
+      Authorization: "Bearer ",
+    });
+
+    expect(response.status).toBe(401);
+    expect(response.body).toEqual({ message: "Unauthorized" });
+  });
+
+  it("should return 401 not authorized without expired token", async () => {
+    const mockPatients = [
+      {
+        id_patient: 1,
+        patient_name: "Patient Tuffy",
+        id_specialty: 5,
+        email: "test@test2.com",
+      },
+    ];
+    const { db } = require("../../src/database/connection.js");
+    db.query.mockResolvedValueOnce(mockPatients);
+
+    const genToken = handlerToken(undefined, -1);
+    const expiredToken = genToken.encode({
+      id_patient: 1,
+      patient_name: "Patient Lorem",
+      email: "patient_lorem@email.com",
+    });
+    const response = await supertest(app)
+      .get("/api/v1/patient")
+      .set({
+        Authorization: "Bearer " + expiredToken,
+      });
 
     expect(response.status).toBe(401);
     expect(response.body).toEqual({ message: "Unauthorized" });
