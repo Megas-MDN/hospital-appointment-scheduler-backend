@@ -67,8 +67,12 @@ const isExpiredAvailability = (availability) => {
   if (!availability) return false;
   const today = new Date();
   const avDate = new Date(availability.created_date);
+  const appointmentDay = availability.id_day_of_week;
+  const nextDate = new Date(avDate);
+  nextDate.setDate(avDate.getDate() + appointmentDay);
+
   if (!availability.recurrent) {
-    if (avDate < today && avDate.getDate() < today.getDate()) return true;
+    if (nextDate < today) return true;
     return false;
   }
   return false;
@@ -145,7 +149,7 @@ const getAllAvailabilitiesService = async (filter = {}) => {
     const response = await model.getAllAvailabilitiesModel(filter);
     return response;
   } catch (error) {
-    console.log(error, "Error = require(getAllAvailabilitiesService");
+    console.log(error, "Error from getAllAvailabilitiesService");
     return { error: true, message: error.message };
   }
 };
