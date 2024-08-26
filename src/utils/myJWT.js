@@ -3,7 +3,7 @@ const crypto = require("crypto");
 
 const handlerToken = (
   key = process.env.JWT_SECRET,
-  expiresInSeconds = process.env.EXPIRE_TIME || 60,
+  expiresInSeconds = process.env.EXPIRE_TIME,
   alg = { alg: "HS256", typ: "CustomJWT" },
 ) => {
   const encodeBase64 = (str) => {
@@ -28,17 +28,15 @@ const handlerToken = (
       let result = "";
       const header = encodeBase64(stringify(alg));
       result += header + ".";
-      const body = encodeBase64(
-        stringify({
-          ...obj,
-          exp:
-            expiresInSeconds > 0
-              ? Math.floor(Date.now() / 1000) + expiresInSeconds
-              : 0,
-          expInSeconds: expiresInSeconds,
-          date: new Date().toISOString(),
-        }),
-      );
+
+      const payload = {
+        ...obj,
+        exp: Math.floor(Date.now() / 1000) + expiresInSeconds,
+        expInSeconds: expiresInSeconds,
+        date: new Date().toISOString(),
+      };
+
+      const body = encodeBase64(stringify(payload));
       result += body + ".";
 
       const checkSum = checkSumGen(header, body);

@@ -5,7 +5,7 @@ const createPatientController = async (req, res, next) => {
   const data = req.body;
   const response = await service.createPatientService(data);
   if (response.error) return next(response);
-  return res.status(STATUS_CODE.OK).json(response);
+  return res.status(STATUS_CODE.CREATED).json(response);
 };
 
 const patientLoginController = async (req, res, next) => {
