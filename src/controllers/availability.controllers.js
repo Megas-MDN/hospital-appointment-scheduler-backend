@@ -1,7 +1,7 @@
-import * as service from "../services/availability.services.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
+const service = require("../services/availability.services.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
 
-export const createAvailabilityController = async (req, res, next) => {
+const createAvailabilityController = async (req, res, next) => {
   const data = req.body;
   const response = await service.createAvailabilityService({
     ...data,
@@ -11,7 +11,7 @@ export const createAvailabilityController = async (req, res, next) => {
   return res.status(STATUS_CODE.CREATED).json(response);
 };
 
-export const updateAvailabilityController = async (req, res, next) => {
+const updateAvailabilityController = async (req, res, next) => {
   const { id_availability } = req.params;
   const data = req.body;
   const response = await service.updateAvailabilityService(
@@ -25,7 +25,7 @@ export const updateAvailabilityController = async (req, res, next) => {
   return res.status(STATUS_CODE.OK).json(response);
 };
 
-export const deleteAvailabilityController = async (req, res, next) => {
+const deleteAvailabilityController = async (req, res, next) => {
   const { id_availability } = req.params;
 
   const response = await service.deleteAvailabilityService(
@@ -36,7 +36,7 @@ export const deleteAvailabilityController = async (req, res, next) => {
   return res.status(STATUS_CODE.OK).json(response);
 };
 
-export const getAllAvailabilitiesController = async (req, res, next) => {
+const getAllAvailabilitiesController = async (req, res, next) => {
   const { limit, page, specialty, doctor } = req.query;
   const filter = {
     limit,
@@ -47,4 +47,11 @@ export const getAllAvailabilitiesController = async (req, res, next) => {
   const response = await service.getAllAvailabilitiesService(filter);
   if (response.error) return next(response);
   return res.status(STATUS_CODE.OK).json(response);
+};
+
+module.exports = {
+  createAvailabilityController,
+  updateAvailabilityController,
+  deleteAvailabilityController,
+  getAllAvailabilitiesController,
 };

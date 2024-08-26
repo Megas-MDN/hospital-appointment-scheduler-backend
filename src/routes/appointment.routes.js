@@ -1,10 +1,10 @@
-import { Router } from "express";
-import * as controller from "../controllers/appointment.controllers.js";
-import { ROOT_PATH } from "../utils/basePathHash.js";
-import { auth } from "../middlewares/auth.js";
+const { Router } = require("express");
+const controller = require("../controllers/appointment.controllers.js");
+const { ROOT_PATH } = require("../utils/basePathHash.js");
+const { auth } = require("../middlewares/auth.js");
 
 const BASE_PATH = ROOT_PATH.APPOINTMENT;
-export const appointmentRoutes = Router();
+const appointmentRoutes = Router();
 
 appointmentRoutes.get(
   `${BASE_PATH}`,
@@ -22,3 +22,5 @@ appointmentRoutes.post(
   auth,
   controller.scheduleAppointmentBySpecialtyController,
 );
+
+module.exports = { appointmentRoutes };

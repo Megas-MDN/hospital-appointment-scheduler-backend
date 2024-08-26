@@ -1,10 +1,10 @@
-import { db } from "../database/connection.js";
-import * as availabilityModel from "./availability.models.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
-import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
-import { incrementMinutes } from "../utils/incrementMinutes.js";
+const { db } = require("../database/connection.js");
+const availabilityModel = require("./availability.models.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
+const { ERROR_MESSAGE } = require("../utils/ErrorMessage.js");
+const { incrementMinutes } = require("../utils/incrementMinutes.js");
 
-export const getNextAvailableAppointmentsModel = async (filter) => {
+const getNextAvailableAppointmentsModel = async (filter) => {
   const GENERALIST_ID = 5;
   const specialty = filter.specialty || GENERALIST_ID;
   const doctor = filter.doctor || "";
@@ -17,7 +17,7 @@ export const getNextAvailableAppointmentsModel = async (filter) => {
   return response[0];
 };
 
-export const scheduleAppointmentModel = async (data) => {
+const scheduleAppointmentModel = async (data) => {
   const availability = await availabilityModel.getAvailabilityByIdModel(
     data.id_availability,
   );
@@ -56,7 +56,12 @@ export const scheduleAppointmentModel = async (data) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from scheduleAppointmentModel");
+    console.log(error, "Error = require(scheduleAppointmentModel");
     return { error: true, message: error.message };
   }
+};
+
+module.exports = {
+  getNextAvailableAppointmentsModel,
+  scheduleAppointmentModel,
 };

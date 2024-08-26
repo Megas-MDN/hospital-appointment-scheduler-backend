@@ -1,8 +1,8 @@
-import { handlerToken } from "../utils/myJWT.js";
-import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
+const { handlerToken } = require("../utils/myJWT.js");
+const { ERROR_MESSAGE } = require("../utils/ErrorMessage.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
 
-export const auth = (req, _res, next) => {
+const auth = (req, _res, next) => {
   const { authorization } = req.headers;
   if (!authorization)
     return next({
@@ -21,3 +21,5 @@ export const auth = (req, _res, next) => {
   req.user = user;
   next();
 };
+
+module.exports = { auth };

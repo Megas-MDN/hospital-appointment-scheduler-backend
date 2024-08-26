@@ -12,7 +12,9 @@
     "dc:down": "docker compose down --remove-orphans",
     "log": "docker compose logs -f api",
     "drop": "docker compose down -v --remove-orphans",
-    "lint": "npx eslint --fix"
+    "lint": "npx eslint --fix",
+    "test": "npx jest --coverage",
+    "test:dev": "npx jest --watch"
   },
   "keywords": [
     "hospital",
@@ -24,7 +26,6 @@
   ],
   "description": "A system for scheduling hospital appointments based on symptoms or specialization, considering doctor availability and patient load.",
   "license": "MIT",
-  "type": "module",
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": [

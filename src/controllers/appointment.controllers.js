@@ -1,11 +1,7 @@
-import * as service from "../services/appointment.services.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
+const service = require("../services/appointment.services.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
 
-export const getNextAvailableAppointmentsController = async (
-  req,
-  res,
-  next,
-) => {
+const getNextAvailableAppointmentsController = async (req, res, next) => {
   const { specialty, doctor } = req.query;
   const response = await service.getNextAvailableAppointmentsService({
     specialty,
@@ -16,7 +12,7 @@ export const getNextAvailableAppointmentsController = async (
   return res.status(STATUS_CODE.OK).json(response);
 };
 
-export const scheduleAppointmentByDoctorController = async (req, res, next) => {
+const scheduleAppointmentByDoctorController = async (req, res, next) => {
   const { id_doctor } = req.params;
   const user = req.user;
   const { symptoms } = req.body;
@@ -29,11 +25,7 @@ export const scheduleAppointmentByDoctorController = async (req, res, next) => {
   return res.status(STATUS_CODE.OK).json(response);
 };
 
-export const scheduleAppointmentBySpecialtyController = async (
-  req,
-  res,
-  next,
-) => {
+const scheduleAppointmentBySpecialtyController = async (req, res, next) => {
   const { id_specialty } = req.params;
   const user = req.user;
   const { symptoms } = req.body;
@@ -44,4 +36,10 @@ export const scheduleAppointmentBySpecialtyController = async (
   });
   if (response?.error) return next(response);
   return res.status(STATUS_CODE.OK).json(response);
+};
+
+module.exports = {
+  getNextAvailableAppointmentsController,
+  scheduleAppointmentByDoctorController,
+  scheduleAppointmentBySpecialtyController,
 };

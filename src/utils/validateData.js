@@ -1,4 +1,4 @@
-export const validateData = ({ data, schema, optional = {} }) => {
+const validateData = ({ data, schema, optional = {} }) => {
   for (const key in schema) {
     if (data[key] === undefined && !optional[key] && !optional.all)
       return { error: true, message: `Missing ${key} field`, status: 400 };
@@ -9,3 +9,5 @@ export const validateData = ({ data, schema, optional = {} }) => {
 
   return { error: false };
 };
+
+module.exports = { validateData };

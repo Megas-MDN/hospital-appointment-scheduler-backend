@@ -1,6 +1,6 @@
-import { db } from "../database/connection.js";
+const { db } = require("../database/connection.js");
 
-export const createDoctorModel = async (data) => {
+const createDoctorModel = async (data) => {
   const { doctor_name, id_specialty, email, passwordHash } = data;
   try {
     const [response] = await db.query(
@@ -15,10 +15,10 @@ export const createDoctorModel = async (data) => {
   }
 };
 
-export const findDoctorByEmailModel = async (email) => {
+const findDoctorByEmailModel = async (email) => {
   try {
     const [response] = await db.query(
-      "SELECT id_doctor, doctor_name, id_specialty, email FROM doctor WHERE email = $1 AND deleted_date IS NULL",
+      "SELECT id_doctor, doctor_name, id_specialty, email from doctor WHERE email = $1 AND deleted_date IS NULL",
       [email],
     );
     return response;
@@ -28,10 +28,10 @@ export const findDoctorByEmailModel = async (email) => {
   }
 };
 
-export const findDoctorByIdModel = async (id) => {
+const findDoctorByIdModel = async (id) => {
   try {
     const [response] = await db.query(
-      "SELECT id_doctor, doctor_name, id_specialty, email FROM doctor WHERE id_doctor = $1 AND deleted_date IS NULL",
+      "SELECT id_doctor, doctor_name, id_specialty, email from doctor WHERE id_doctor = $1 AND deleted_date IS NULL",
       [id],
     );
     return response;
@@ -41,7 +41,7 @@ export const findDoctorByIdModel = async (id) => {
   }
 };
 
-export const updateDoctorModel = async (data) => {
+const updateDoctorModel = async (data) => {
   const { id_doctor, doctor_name, id_specialty, email, passwordHash } = data;
 
   try {
@@ -58,7 +58,7 @@ export const updateDoctorModel = async (data) => {
   }
 };
 
-export const deleteDoctorModel = async (id) => {
+const deleteDoctorModel = async (id) => {
   try {
     const [response] = await db.query(
       "UPDATE doctor SET deleted_date = NOW(), updated_date = NOW() WHERE id_doctor = $1 AND deleted_date IS NULL RETURNING id_doctor, doctor_name, id_specialty, email",
@@ -70,7 +70,7 @@ export const deleteDoctorModel = async (id) => {
   }
 };
 
-export const getAllDoctorsModel = async (filter) => {
+const getAllDoctorsModel = async (filter) => {
   const limit = filter.limit || 5;
   const page = filter.page || 0;
   const search = filter.search || "";
@@ -78,7 +78,7 @@ export const getAllDoctorsModel = async (filter) => {
 
   try {
     const response = await db.query(
-      `SELECT id_doctor, doctor_name, id_specialty, email FROM doctor WHERE LOWER(doctor_name) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
+      `SELECT id_doctor, doctor_name, id_specialty, email from doctor WHERE LOWER(doctor_name) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
       [limit, offset, `%${search}%`],
     );
     return response;
@@ -88,10 +88,10 @@ export const getAllDoctorsModel = async (filter) => {
   }
 };
 
-export const findDoctorByEmailWithPasswordModel = async (email) => {
+const findDoctorByEmailWithPasswordModel = async (email) => {
   try {
     const [response] = await db.query(
-      "SELECT id_doctor, password FROM doctor WHERE email = $1 AND deleted_date IS NULL",
+      "SELECT id_doctor, password from doctor WHERE email = $1 AND deleted_date IS NULL",
       [email],
     );
     return response;
@@ -99,4 +99,14 @@ export const findDoctorByEmailWithPasswordModel = async (email) => {
     console.log(error, "Error from findDoctorByEmailWithPasswordModel");
     return { error: true, message: error.message };
   }
+};
+
+module.exports = {
+  createDoctorModel,
+  findDoctorByEmailModel,
+  findDoctorByIdModel,
+  updateDoctorModel,
+  deleteDoctorModel,
+  getAllDoctorsModel,
+  findDoctorByEmailWithPasswordModel,
 };

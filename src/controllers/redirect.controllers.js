@@ -1,5 +1,7 @@
-import { API_VERSION } from "../utils/apiVersionsEnpoint.js";
+const { API_VERSION } = require("../utils/apiVersionsEnpoint.js");
 
-export const redirectHomeController = (_req, res) => {
+const redirectHomeController = (_req, res) => {
   return res.redirect(API_VERSION.MAIN);
 };
+
+module.exports = { redirectHomeController };

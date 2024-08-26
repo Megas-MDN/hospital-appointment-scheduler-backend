@@ -1,7 +1,7 @@
-import { db } from "../database/connection.js";
-import { makeCaseSql } from "../utils/reorderDaysUtil.js";
+const { db } = require("../database/connection.js");
+const { makeCaseSql } = require("../utils/reorderDaysUtil.js");
 
-export const createAvailabilityModel = async (data) => {
+const createAvailabilityModel = async (data) => {
   const {
     id_doctor,
     id_day_of_week,
@@ -24,12 +24,12 @@ export const createAvailabilityModel = async (data) => {
     );
     return { ...data, id_availability: response.id_availability };
   } catch (error) {
-    console.log(error, "Error from createAvailabilityModel");
+    console.log(error, "Error = require(createAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
 
-export const getAllAvailabilitiesModel = async (filter = {}) => {
+const getAllAvailabilitiesModel = async (filter = {}) => {
   const limit = filter.limit || 5;
   const page = filter.page || 0;
   const specialty = filter.specialty || "";
@@ -39,7 +39,7 @@ export const getAllAvailabilitiesModel = async (filter = {}) => {
     const response = await db.query(
       `SELECT a.id_availability, a.id_doctor, a.id_day_of_week, a.start_time, a.end_time, a.appointment_time, a.recurrent, 
        d.doctor_name, d.email, ms.specialty, dow.day 
-      FROM availability a
+      = require(availability a
       LEFT JOIN doctor d ON d.id_doctor = a.id_doctor
       LEFT JOIN medical_specialties ms ON ms.id_specialty = d.id_specialty
       LEFT JOIN day_of_week dow ON dow.id_day_of_week = a.id_day_of_week
@@ -72,12 +72,12 @@ export const getAllAvailabilitiesModel = async (filter = {}) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from getAllAvailabilitiesModel");
+    console.log(error, "Error = require(getAllAvailabilitiesModel");
     return { error: true, message: error.message };
   }
 };
 
-export const deleteAvailabilityModel = async (id_availability) => {
+const deleteAvailabilityModel = async (id_availability) => {
   try {
     const [response] = await db.query(
       "UPDATE availability SET deleted_date = NOW(), updated_date = NOW() WHERE id_availability = $1 RETURNING *",
@@ -85,12 +85,12 @@ export const deleteAvailabilityModel = async (id_availability) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from deleteAvailabilityModel");
+    console.log(error, "Error = require(deleteAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
 
-export const updateAvailabilityModel = async (data) => {
+const updateAvailabilityModel = async (data) => {
   const { id_availability, start_time, end_time, appointment_time, recurrent } =
     data;
   try {
@@ -100,41 +100,44 @@ export const updateAvailabilityModel = async (data) => {
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from updateAvailabilityModel");
+    console.log(error, "Error = require(updateAvailabilityModel");
     return { error: true, message: error.message };
   }
 };
 
-export const findAvailabilityByIdDoctorIdDayOfWeekModel = async (
+const findAvailabilityByIdDoctorIdDayOfWeekModel = async (
   id_doctor,
   id_day_of_week,
 ) => {
   try {
     const [response] = await db.query(
-      "SELECT * FROM availability WHERE id_doctor = $1 AND id_day_of_week = $2 AND deleted_date IS NULL",
+      "SELECT  * from availability WHERE id_doctor = $1 AND id_day_of_week = $2 AND deleted_date IS NULL",
       [id_doctor, id_day_of_week],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from findAvailabilityByIdDoctorIdDayOfWeekModel");
+    console.log(
+      error,
+      "Error = require(findAvailabilityByIdDoctorIdDayOfWeekModel",
+    );
     return { error: true, message: error.message };
   }
 };
 
-export const getAvailabilityByIdModel = async (id_availability) => {
+const getAvailabilityByIdModel = async (id_availability) => {
   try {
     const [response] = await db.query(
-      "SELECT * FROM availability WHERE id_availability = $1 AND deleted_date IS NULL",
+      "SELECT  * from availability WHERE id_availability = $1 AND deleted_date IS NULL",
       [id_availability],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from getAvailabilityByIdModel");
+    console.log(error, "Error = require(getAvailabilityByIdModel");
     return { error: true, message: error.message };
   }
 };
 
-export const deleteExpiredAvailabilitiesModel = async (availabilities) => {
+const deleteExpiredAvailabilitiesModel = async (availabilities) => {
   try {
     return await Promise.all(
       availabilities.map((availability) => {
@@ -142,23 +145,34 @@ export const deleteExpiredAvailabilitiesModel = async (availabilities) => {
       }),
     );
   } catch (error) {
-    console.log(error, "Error from deleteExpiredAvailabilitiesModel");
+    console.log(error, "Error = require(deleteExpiredAvailabilitiesModel");
     return { error: true, message: error.message };
   }
 };
 
-export const getAllNotRecorrentAvailabilitiesModel = async () => {
+const getAllNotRecorrentAvailabilitiesModel = async () => {
   try {
     const response = await db.query(
       `SELECT * 
-       FROM availability 
+       = require(availability 
        WHERE (recurrent = false OR recurrent IS NULL)
        AND deleted_date IS NULL
        AND created_date < CURRENT_DATE;`,
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from getAllNotRecorrentAvailabilitiesModel");
+    console.log(error, "Error = require(getAllNotRecorrentAvailabilitiesModel");
     return { error: true, message: error.message };
   }
+};
+
+module.exports = {
+  createAvailabilityModel,
+  getAllAvailabilitiesModel,
+  deleteAvailabilityModel,
+  updateAvailabilityModel,
+  findAvailabilityByIdDoctorIdDayOfWeekModel,
+  getAvailabilityByIdModel,
+  deleteExpiredAvailabilitiesModel,
+  getAllNotRecorrentAvailabilitiesModel,
 };

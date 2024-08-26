@@ -1,6 +1,6 @@
-import * as model from "../models/appointment.models.js";
+const model = require("../models/appointment.models.js");
 
-export const getNextAvailableAppointmentsService = async ({
+const getNextAvailableAppointmentsService = async ({
   specialty,
   doctor,
 } = {}) => {
@@ -26,7 +26,7 @@ export const getNextAvailableAppointmentsService = async ({
   };
 };
 
-export const scheduleAppointmentService = async ({
+const scheduleAppointmentService = async ({
   user = {},
   specialty,
   doctor,
@@ -51,4 +51,9 @@ export const scheduleAppointmentService = async ({
   };
 
   return await model.scheduleAppointmentModel(appointment);
+};
+
+module.exports = {
+  getNextAvailableAppointmentsService,
+  scheduleAppointmentService,
 };

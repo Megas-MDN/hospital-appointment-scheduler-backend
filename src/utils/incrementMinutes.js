@@ -1,4 +1,4 @@
-export const incrementMinutes = (time, minutesToIncrement) => {
+const incrementMinutes = (time, minutesToIncrement) => {
   let timeString = time;
 
   let timeParts = timeString.split(":");
@@ -19,3 +19,5 @@ export const incrementMinutes = (time, minutesToIncrement) => {
 
   return `${newHours}:${newMinutes}:${newSeconds}`;
 };
+
+module.exports = { incrementMinutes };

@@ -1,6 +1,6 @@
-import { ROOT_PATH } from "../utils/basePathHash.js";
+const { ROOT_PATH } = require("../utils/basePathHash.js");
 
-export const notImplemented = (req, res) => {
+const notImplemented = (req, res) => {
   const { authorization } = req.headers;
   return res.status(501).send({
     message: "Route not implemented",
@@ -10,3 +10,5 @@ export const notImplemented = (req, res) => {
     root_options: ROOT_PATH,
   });
 };
+
+module.exports = { notImplemented };

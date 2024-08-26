@@ -1,4 +1,4 @@
-export const logs = (req, _res, next) => {
+const logs = (req, _res, next) => {
   console.log(`${req.method} - ${req.url}\n`);
   Object.entries(req.body).length > 0 &&
     console.log(
@@ -6,3 +6,5 @@ export const logs = (req, _res, next) => {
     );
   next();
 };
+
+module.exports = { logs };

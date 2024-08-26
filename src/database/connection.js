@@ -1,11 +1,7 @@
-import pgp from "pg-promise";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const pgp = require("pg-promise");
+const { join } = require("path");
 const filePathTables = join(__dirname, "sql", "create-tables.sql");
 const filePathSeeds = join(__dirname, "sql", "seeds.sql");
-
 const pgpConection = pgp();
 
 const dbConfig = {
@@ -16,21 +12,23 @@ const dbConfig = {
   password: process.env.DB_PASSWORD || "postgres",
 };
 
-export const db = pgpConection(dbConfig);
+const db = pgpConection(dbConfig);
 
-export const createTables = async () => {
+const createTables = async () => {
   const query = new pgpConection.QueryFile(filePathTables, { minify: true });
   const seeds = new pgpConection.QueryFile(filePathSeeds, { minify: true });
   try {
     await db.query(query);
-    const dayOfWeek = await db.query("SELECT * FROM day_of_week");
+    const dayOfWeek = await db.query("SELECT  * from day_of_week");
     const medicalSpecialties = await db.query(
-      "SELECT * FROM medical_specialties",
+      "SELECT  * from medical_specialties",
     );
     if (dayOfWeek.length === 0 && medicalSpecialties.length === 0) {
       await db.query(seeds);
     }
   } catch (error) {
-    console.log(error, "Error from createTables");
+    console.log(error, "Error = require(createTables");
   }
 };
+
+module.exports = { db, createTables };

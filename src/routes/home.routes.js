@@ -1,8 +1,10 @@
-import { Router } from "express";
+const { Router } = require("express");
 
-import * as controller from "../controllers/home.controllers.js";
+const controller = require("../controllers/home.controllers.js");
 
 const BASE_PATH = "/";
-export const homeRoutes = Router();
+const homeRoutes = Router();
 
 homeRoutes.get(`${BASE_PATH}`, controller.homeController);
+
+module.exports = { homeRoutes };

@@ -1,10 +1,10 @@
-import { Router } from "express";
-import * as controller from "../controllers/availability.controllers.js";
-import { ROOT_PATH } from "../utils/basePathHash.js";
-import { auth } from "../middlewares/auth.js";
+const { Router } = require("express");
+const controller = require("../controllers/availability.controllers.js");
+const { ROOT_PATH } = require("../utils/basePathHash.js");
+const { auth } = require("../middlewares/auth.js");
 
 const BASE_PATH = ROOT_PATH.AVAILABILITY;
-export const availabilityRoutes = Router();
+const availabilityRoutes = Router();
 
 availabilityRoutes.get(
   `${BASE_PATH}`,
@@ -28,3 +28,5 @@ availabilityRoutes.delete(
   auth,
   controller.deleteAvailabilityController,
 );
+
+module.exports = { availabilityRoutes };

@@ -1,4 +1,4 @@
-export const STATUS_CODE = {
+const STATUS_CODE = {
   OK: 200,
   CREATED: 201,
   ACCEPTED: 202,
@@ -9,3 +9,5 @@ export const STATUS_CODE = {
   SERVER_ERROR: 500,
   FORBIDDEN: 403,
 };
+
+module.exports = { STATUS_CODE };

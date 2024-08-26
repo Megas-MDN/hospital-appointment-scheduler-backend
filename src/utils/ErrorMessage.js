@@ -1,4 +1,4 @@
-export const ERROR_MESSAGE = {
+const ERROR_MESSAGE = {
   USER_NOT_FOUND: "User not found",
   USER_ALREADY_EXISTS: "User already exists",
   INVALID_CREDENTIALS: "Invalid credentials",
@@ -13,3 +13,5 @@ export const ERROR_MESSAGE = {
   AVAILABILITY_EXPIRED: "Availability expired",
   AVAILABILITY_ALREADY_EXISTS: "Availability already exists",
 };
+
+module.exports = { ERROR_MESSAGE };

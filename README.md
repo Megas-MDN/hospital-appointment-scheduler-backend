@@ -45,7 +45,7 @@ This project is a hospital appointment scheduling system developed to carry out 
 ### Base URL
 
 ```javascript
-const BASE_URL = "http://localhost:3001/api/v1";
+const BASE_URL = "http://localhost:3001/api/v1");
 ```
 
 <hr>
@@ -190,7 +190,7 @@ Body required:
 | email          | string | yes      | Doctor email    | yes    |
 | password       | string | yes      | Strong password | no     |
 
-\* From table [medical_specialties](#medical-specialties)
+\ \* from table [medical_specialties](#medical-specialties)
 
 <details>
 <summary>
@@ -255,7 +255,7 @@ Body required:
 | email          | string | no       | Doctor email    | yes    |
 | password       | string | no       | Strong password | no     |
 
-\* From table [medical_specialties](#medical-specialties)
+\ \* from table [medical_specialties](#medical-specialties)
 
 <details>
 <summary>

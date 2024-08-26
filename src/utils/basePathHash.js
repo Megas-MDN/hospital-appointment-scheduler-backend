@@ -1,4 +1,4 @@
-export const ROOT_PATH = {
+const ROOT_PATH = {
   LOGIN: "/login",
   REGISTER: "/register",
   DOCTOR: "/doctor",
@@ -6,3 +6,5 @@ export const ROOT_PATH = {
   AVAILABILITY: "/availability",
   APPOINTMENT: "/appointment",
 };
+
+module.exports = { ROOT_PATH };

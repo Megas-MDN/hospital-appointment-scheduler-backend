@@ -1,6 +1,6 @@
-import crypto from "crypto";
+const crypto = require("crypto");
 
-export const handlerToken = (
+const handlerToken = (
   key = process.env.JWT_SECRET,
   expiresInSeconds = process.env.EXPIRE_TIME || 60,
   alg = { alg: "HS256", typ: "CustomJWT" },
@@ -61,3 +61,5 @@ export const handlerToken = (
     },
   };
 };
+
+module.exports = { handlerToken };

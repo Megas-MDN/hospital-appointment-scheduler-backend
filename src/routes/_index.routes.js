@@ -1,6 +1,8 @@
-import { Router } from "express";
-import { redirectRoutes } from "./redirect.routes.js";
+const { Router } = require("express");
+const { redirectRoutes } = require("./redirect.routes.js");
 
-export const routes = Router();
+const routes = Router();
 
 routes.use(redirectRoutes);
+
+module.exports = { routes };

@@ -1,10 +1,10 @@
-import * as model from "../models/doctor.models.js";
-import * as modelSpecialty from "../models/specialty.models.js";
-import * as handlerPassword from "../utils/handlePassword.js";
-import { handlerToken } from "../utils/myJWT.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
-import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
-import { validateData } from "../utils/validateData.js";
+const model = require("../models/doctor.models.js");
+const modelSpecialty = require("../models/specialty.models.js");
+const handlerPassword = require("../utils/handlePassword.js");
+const { handlerToken } = require("../utils/myJWT.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
+const { ERROR_MESSAGE } = require("../utils/ErrorMessage.js");
+const { validateData } = require("../utils/validateData.js");
 
 const doctorSchema = {
   doctor_name: "string",
@@ -13,15 +13,15 @@ const doctorSchema = {
   password: "string",
 };
 
-export const findDoctorByEmailService = async (email) => {
+const findDoctorByEmailService = async (email) => {
   return await model.findDoctorByEmailModel(email);
 };
 
-export const findDoctorByIdService = async (id) => {
+const findDoctorByIdService = async (id) => {
   return await model.findDoctorByIdModel(id);
 };
 
-export const createDoctorService = async (data) => {
+const createDoctorService = async (data) => {
   const oldUser = await findDoctorByEmailService(data.email);
   if (oldUser)
     return {
@@ -59,7 +59,7 @@ export const createDoctorService = async (data) => {
   return { token, user };
 };
 
-export const doctorLoginService = async ({ email, password }) => {
+const doctorLoginService = async ({ email, password }) => {
   const isValid = validateData({
     data: { email, password },
     schema: { email: "string", password: "string" },
@@ -89,7 +89,7 @@ export const doctorLoginService = async ({ email, password }) => {
   return { token };
 };
 
-export const doctorUpdateService = async (data, userLogged) => {
+const doctorUpdateService = async (data, userLogged) => {
   const { id_doctor, doctor_name, id_specialty, email, password } = data;
   const user = await model.findDoctorByIdModel(id_doctor);
   if (!user)
@@ -131,7 +131,7 @@ export const doctorUpdateService = async (data, userLogged) => {
   return response;
 };
 
-export const doctorDeleteService = async (id, userLogged) => {
+const doctorDeleteService = async (id, userLogged) => {
   const user = await model.findDoctorByIdModel(id);
   if (!user)
     return {
@@ -147,8 +147,17 @@ export const doctorDeleteService = async (id, userLogged) => {
   return response;
 };
 
-export const getAllDoctorsService = async (filter) => {
+const getAllDoctorsService = async (filter) => {
   const response = await model.getAllDoctorsModel(filter);
   if (response.error) return response;
   return response;
+};
+
+module.exports = {
+  createDoctorService,
+  findDoctorByIdService,
+  doctorLoginService,
+  doctorUpdateService,
+  doctorDeleteService,
+  getAllDoctorsService,
 };

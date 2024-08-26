@@ -1,9 +1,9 @@
-import * as model from "../models/patient.models.js";
-import * as handlerPassword from "../utils/handlePassword.js";
-import { handlerToken } from "../utils/myJWT.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
-import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
-import { validateData } from "../utils/validateData.js";
+const model = require("../models/patient.models.js");
+const handlerPassword = require("../utils/handlePassword.js");
+const { handlerToken } = require("../utils/myJWT.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
+const { ERROR_MESSAGE } = require("../utils/ErrorMessage.js");
+const { validateData } = require("../utils/validateData.js");
 
 const patientSchema = {
   patient_name: "string",
@@ -11,15 +11,15 @@ const patientSchema = {
   password: "string",
 };
 
-export const findPatientByEmailService = async (email) => {
+const findPatientByEmailService = async (email) => {
   return await model.findPatientByEmailModel(email);
 };
 
-export const findPatientByIdService = async (id) => {
+const findPatientByIdService = async (id) => {
   return await model.findPatientByIdModel(id);
 };
 
-export const createPatientService = async (data) => {
+const createPatientService = async (data) => {
   const oldUser = await findPatientByEmailService(data.email);
   if (oldUser)
     return {
@@ -50,7 +50,7 @@ export const createPatientService = async (data) => {
   return { token, user };
 };
 
-export const patientLoginService = async ({ email, password }) => {
+const patientLoginService = async ({ email, password }) => {
   const isValid = validateData({
     data: { email, password },
     schema: { email: "string", password: "string" },
@@ -84,7 +84,7 @@ export const patientLoginService = async ({ email, password }) => {
   return { token };
 };
 
-export const patientUpdateService = async (data, userLogged) => {
+const patientUpdateService = async (data, userLogged) => {
   const { id_patient, patient_name, email, password } = data;
   const user = await model.findPatientByIdModel(id_patient);
   if (!user)
@@ -119,7 +119,7 @@ export const patientUpdateService = async (data, userLogged) => {
   return response;
 };
 
-export const patientDeleteService = async (id, userLogged) => {
+const patientDeleteService = async (id, userLogged) => {
   const user = await model.findPatientByIdModel(id);
   if (!user)
     return {
@@ -139,8 +139,18 @@ export const patientDeleteService = async (id, userLogged) => {
   return response;
 };
 
-export const getAllPatientsService = async (filter) => {
+const getAllPatientsService = async (filter) => {
   const response = await model.getAllPatientsModel(filter);
   if (response.error) return response;
   return response;
+};
+
+module.exports = {
+  findPatientByEmailService,
+  findPatientByIdService,
+  createPatientService,
+  patientLoginService,
+  patientUpdateService,
+  patientDeleteService,
+  getAllPatientsService,
 };

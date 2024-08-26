@@ -1,8 +1,8 @@
-import * as model from "../models/availability.models.js";
-import * as dayOfWeek from "../models/dayOfWeek.models.js";
-import { STATUS_CODE } from "../utils/StatusCode.js";
-import { ERROR_MESSAGE } from "../utils/ErrorMessage.js";
-import { validateData } from "../utils/validateData.js";
+const model = require("../models/availability.models.js");
+const dayOfWeek = require("../models/dayOfWeek.models.js");
+const { STATUS_CODE } = require("../utils/StatusCode.js");
+const { ERROR_MESSAGE } = require("../utils/ErrorMessage.js");
+const { validateData } = require("../utils/validateData.js");
 
 const availabilitySchema = {
   id_doctor: "number",
@@ -13,7 +13,7 @@ const availabilitySchema = {
   recurrent: "boolean",
 };
 
-export const createAvailabilityService = async (data) => {
+const createAvailabilityService = async (data) => {
   const isValid = validateData({
     data,
     schema: availabilitySchema,
@@ -74,7 +74,7 @@ const isExpiredAvailability = (availability) => {
   return false;
 };
 
-export const updateAvailabilityService = async (data, userLogged) => {
+const updateAvailabilityService = async (data, userLogged) => {
   const oldAvailability = await model.getAvailabilityByIdModel(
     data.id_availability,
   );
@@ -137,7 +137,7 @@ export const updateAvailabilityService = async (data, userLogged) => {
   });
   return availability;
 };
-export const getAllAvailabilitiesService = async (filter = {}) => {
+const getAllAvailabilitiesService = async (filter = {}) => {
   try {
     const notRecorrent = await model.getAllNotRecorrentAvailabilitiesModel();
     const expireds = notRecorrent.filter((av) => isExpiredAvailability(av));
@@ -145,15 +145,12 @@ export const getAllAvailabilitiesService = async (filter = {}) => {
     const response = await model.getAllAvailabilitiesModel(filter);
     return response;
   } catch (error) {
-    console.log(error, "Error from getAllAvailabilitiesService");
+    console.log(error, "Error = require(getAllAvailabilitiesService");
     return { error: true, message: error.message };
   }
 };
 
-export const deleteAvailabilityService = async (
-  id_availability,
-  userLogged,
-) => {
+const deleteAvailabilityService = async (id_availability, userLogged) => {
   const availability = await model.getAvailabilityByIdModel(id_availability);
   if (availability?.error) return availability;
   if (!availability)
@@ -172,4 +169,11 @@ export const deleteAvailabilityService = async (
   const res = await model.deleteAvailabilityModel(id_availability);
   if (res?.error) return res;
   return availability;
+};
+
+module.exports = {
+  createAvailabilityService,
+  getAllAvailabilitiesService,
+  deleteAvailabilityService,
+  updateAvailabilityService,
 };

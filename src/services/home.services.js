@@ -1,5 +1,7 @@
-import * as model from "../models/home.models.js";
+const model = require("../models/home.models.js");
 
-export const homeService = () => {
+const homeService = () => {
   return model.homeModel();
 };
+
+module.exports = { homeService };

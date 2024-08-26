@@ -1,19 +1,19 @@
-import { db } from "../database/connection.js";
+const { db } = require("../database/connection.js");
 
-export const findSpecialtyByIdModel = async (id) => {
+const findSpecialtyByIdModel = async (id) => {
   try {
     const [response] = await db.query(
-      "SELECT * FROM medical_specialties WHERE id_specialty = $1 AND deleted_date IS NULL",
+      "SELECT  * from medical_specialties WHERE id_specialty = $1 AND deleted_date IS NULL",
       [id],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from findSpecialtyByIdModel");
+    console.log(error, "Error = require(findSpecialtyByIdModel");
     return { error: true, message: error.message };
   }
 };
 
-export const getAllSpecialtyByIdModel = async (filter) => {
+const getAllSpecialtyByIdModel = async (filter) => {
   const limit = filter.limit || 5;
   const page = filter.page || 0;
   const search = filter.search || "";
@@ -21,12 +21,17 @@ export const getAllSpecialtyByIdModel = async (filter) => {
 
   try {
     const response = await db.query(
-      `SELECT * FROM medical_specialties WHERE LOWER(specialty) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
+      `SELECT  * from medical_specialties WHERE LOWER(specialty) LIKE LOWER($3) AND deleted_date IS NULL LIMIT $1 OFFSET $2`,
       [limit, offset, `%${search}%`],
     );
     return response;
   } catch (error) {
-    console.log(error, "Error from getAllSpecialtyByIdModel");
+    console.log(error, "Error = require(getAllSpecialtyByIdModel");
     return { error: true, message: error.message };
   }
+};
+
+module.exports = {
+  findSpecialtyByIdModel,
+  getAllSpecialtyByIdModel,
 };

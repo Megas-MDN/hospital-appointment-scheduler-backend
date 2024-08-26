@@ -1,9 +1,9 @@
-import * as model from "../models/login.models.js";
-import bcrypt from "bcrypt";
-import { handlerToken } from "../utils/myJWT.js";
-import { validateData } from "../utils/validateData.js";
+const model = require("../models/login.models.js");
+const bcrypt = require("bcrypt");
+const { handlerToken } = require("../utils/myJWT.js");
+const { validateData } = require("../utils/validateData.js");
 
-export const homeLoginService = () => {
+const homeLoginService = () => {
   return model.homeLoginModel();
 };
 
@@ -11,7 +11,7 @@ const compareHashPassword = async (password, hash) => {
   return bcrypt.compare(password, hash);
 };
 
-export const goLoginService = async ({ userEmail, password }) => {
+const goLoginService = async ({ userEmail, password }) => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const isValid = validateData({
     data: { userEmail, password },
@@ -31,3 +31,5 @@ export const goLoginService = async ({ userEmail, password }) => {
   const token = genToken.encode({ user_id: user.user_id, userEmail });
   return { token };
 };
+
+module.exports = { homeLoginService, goLoginService };

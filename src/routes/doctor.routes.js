@@ -1,10 +1,10 @@
-import { Router } from "express";
-import * as controller from "../controllers/doctor.controllers.js";
-import { ROOT_PATH } from "../utils/basePathHash.js";
-import { auth } from "../middlewares/auth.js";
+const { Router } = require("express");
+const controller = require("../controllers/doctor.controllers.js");
+const { ROOT_PATH } = require("../utils/basePathHash.js");
+const { auth } = require("../middlewares/auth.js");
 
 const BASE_PATH = ROOT_PATH.DOCTOR;
-export const doctorRoutes = Router();
+const doctorRoutes = Router();
 
 doctorRoutes.get(`${BASE_PATH}`, controller.getAllDoctorsController);
 doctorRoutes.get(
@@ -23,3 +23,5 @@ doctorRoutes.delete(
 );
 doctorRoutes.post(`${BASE_PATH}/login`, controller.doctorLoginController);
 doctorRoutes.post(`${BASE_PATH}`, controller.createDoctorController);
+
+module.exports = { doctorRoutes };
