@@ -95,4 +95,9 @@ describe("Doctor", () => {
     expect(response.body.user).toHaveProperty("id_doctor", 1);
     expect(response.body).toHaveProperty("token");
   });
+
+  // it("should update doctor", async () => {
+  //   const { db } = require("../../src/database/connection.js");
+  //   db.query.mockResolvedValueOnce([]);
+  // });
 });
