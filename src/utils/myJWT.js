@@ -2,8 +2,8 @@ require("dotenv").config();
 const crypto = require("crypto");
 
 const handlerToken = (
-  key = process.env.JWT_SECRET,
-  expiresInSeconds = process.env.EXPIRE_TIME,
+  key = process.env.JWT_SECRET || "STR_SECRET",
+  expiresInSeconds = process.env.EXPIRE_TIME || 60,
   alg = { alg: "HS256", typ: "CustomJWT" },
 ) => {
   const encodeBase64 = (str) => {
