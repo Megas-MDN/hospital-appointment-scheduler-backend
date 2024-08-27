@@ -6,6 +6,7 @@ const { handlerToken } = require("../../src/utils/myJWT.js");
 
 const BASE_PATH = API_VERSION.V1 + ROOT_PATH.PATIENT;
 
+let token;
 jest.mock("../../src/database/connection.js", () => {
   return {
     createTables: jest.fn(),
