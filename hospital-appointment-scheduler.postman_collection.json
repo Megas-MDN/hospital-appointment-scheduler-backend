@@ -1,0 +1,585 @@
+{
+	"info": {
+		"_postman_id": "c9b6c97e-1b0d-4350-a6d1-f98016660509",
+		"name": "hospital-appointment-scheduler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "36726068"
+	},
+	"item": [
+		{
+			"name": "Doctor",
+			"item": [
+				{
+					"name": "Get ALL Doctors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/doctor?search=",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Doctor By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/doctor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Doctor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_name\": \"Doctor Test\",\r\n  \"id_specialty\": 5,\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/doctor/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login doctor",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"test@test.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/doctor/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Doctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9kb2N0b3IiOjEsImVtYWlsIjoiZG9jdG9yX2xvcmVtQGVtYWlsLmNvbSIsImV4cCI6IjE3MjE2MDM4MDUzNjAwMCIsImV4cEluU2Vjb25kcyI6IjM2MDAwIiwiZGF0ZSI6IjIwMjQtMDctMjFUMjM6MTY6NDUuMDc2WiJ9.mY4LG_byA8Zuor1OUJ-0LJg6yr-qQkBcB5-Wt7iWhHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_name\": \"Doctor Lorens x\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/doctor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Doctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9kb2N0b3IiOjEsImVtYWlsIjoiZG9jdG9yX2xvcmVtQGVtYWlsLmNvbSIsImV4cCI6IjE3MjE2MDM4MDUzNjAwMCIsImV4cEluU2Vjb25kcyI6IjM2MDAwIiwiZGF0ZSI6IjIwMjQtMDctMjFUMjM6MTY6NDUuMDc2WiJ9.mY4LG_byA8Zuor1OUJ-0LJg6yr-qQkBcB5-Wt7iWhHY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_name\": \"Doctor Lorens x\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/doctor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"doctor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Get ALL Patient",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/patient?search=test",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "test"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Patient By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/patient/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Patient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"patient_name\": \"Patient Lorem\",\r\n  \"email\": \"patient_lorem@email.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/patient/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Patient",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"patient_lorem@email.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/patient/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9wYXRpZW50IjoxLCJlbWFpbCI6InBhdGllbnRfbG9yZW1AZW1haWwuY29tIiwiZXhwIjoiMTcyMTYwNjc3MzM2MDAwIiwiZXhwSW5TZWNvbmRzIjoiMzYwMDAiLCJkYXRlIjoiMjAyNC0wNy0yMlQwMDowNjoxMy4yNzVaIn0._S1nkvvnrkCjKXgba0vaUi4-Be3c9iLORyUPx6_iT78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_name\": \"Patient Lorens x\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/patient/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Patient",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9wYXRpZW50IjoxLCJlbWFpbCI6InBhdGllbnRfbG9yZW1AZW1haWwuY29tIiwiZXhwIjoiMTcyMTYwNjc3MzM2MDAwIiwiZXhwSW5TZWNvbmRzIjoiMzYwMDAiLCJkYXRlIjoiMjAyNC0wNy0yMlQwMDowNjoxMy4yNzVaIn0._S1nkvvnrkCjKXgba0vaUi4-Be3c9iLORyUPx6_iT78",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"doctor_name\": \"Patient Lorens x\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/patient/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"patient",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Availabilities",
+			"item": [
+				{
+					"name": "Get ALL Availability",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/availability",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Availability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9kb2N0b3IiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6IjE3MjIxOTczMjgzNjAwMCIsImV4cEluU2Vjb25kcyI6IjM2MDAwIiwiZGF0ZSI6IjIwMjQtMDctMjhUMjA6MDg6NDguNDYyWiJ9.F7Z5x14rk0lpJf8aA2LGiUtUsDtBQJcxpoFXRrVIP0c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_day_of_week\": 5,\r\n    \"start_time\": \"09:00:00\",\r\n    \"end_time\": \"18:00:00\",\r\n    \"appointment_time\": 20,\r\n    \"recurrent\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/availability",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"availability"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Avaliability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9kb2N0b3IiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6IjE3MjIxOTczMjgzNjAwMCIsImV4cEluU2Vjb25kcyI6IjM2MDAwIiwiZGF0ZSI6IjIwMjQtMDctMjhUMjA6MDg6NDguNDYyWiJ9.F7Z5x14rk0lpJf8aA2LGiUtUsDtBQJcxpoFXRrVIP0c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/availability/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"availability",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Availability",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9kb2N0b3IiOjEsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsImV4cCI6IjE3MjIxOTczMjgzNjAwMCIsImV4cEluU2Vjb25kcyI6IjM2MDAwIiwiZGF0ZSI6IjIwMjQtMDctMjhUMjA6MDg6NDguNDYyWiJ9.F7Z5x14rk0lpJf8aA2LGiUtUsDtBQJcxpoFXRrVIP0c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"start_time\": \"10:05:00\"\r\n    // \"end_time\": \"18:00:00\",\r\n    // \"appointment_time\": 20,\r\n    // \"recurrent\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/availability/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"availability",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointments",
+			"item": [
+				{
+					"name": "Get next appointment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/appointment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"appointment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create appointment by Doctor",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9wYXRpZW50IjoxLCJlbWFpbCI6InBhdGllbnRfbG9yZW1AZW1haWwuY29tIiwiZXhwIjoiMTcyNDE2MzEzNDM2MDAwIiwiZXhwSW5TZWNvbmRzIjoiMzYwMDAiLCJkYXRlIjoiMjAyNC0wOC0yMFQxNDoxMjoxNC4zMzZaIn0.xfC2yiOwRlbGxOOsb-MtoMrtWBeKioHt4zU1cyHkA04",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptoms\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/appointment/doctor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"appointment",
+								"doctor",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create appointment by Specialty",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkN1c3RvbUpXVCJ9.eyJpZF9wYXRpZW50IjoxLCJlbWFpbCI6InBhdGllbnRfbG9yZW1AZW1haWwuY29tIiwiZXhwIjoiMTcyNDA3MTUwMDM2MDAwIiwiZXhwSW5TZWNvbmRzIjoiMzYwMDAiLCJkYXRlIjoiMjAyNC0wOC0xOVQxMjo0NTowMC43NzhaIn0.oJVF5efoUps29iVlP2AP7t_BuStlqB6L-Bg-JHF_PTY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"symptoms\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/appointment/specialty/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"appointment",
+								"specialty",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
