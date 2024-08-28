@@ -4,6 +4,7 @@
 
 - [Description](#description)
 - [Schema](#schema)
+- [Postman Collection](#collection)
 - [API](#api)
   - [Base URL](#base-url)
   - [Doctor](#doctor)
@@ -40,12 +41,16 @@ This project is a hospital appointment scheduling system developed to carry out 
 
 ![Schema](./SchemaDB.drawio.png)
 
+## Collection
+
+[Postman Collection](./hospital-appointment-scheduler.postman_collection.json)
+
 ## API
 
 ### Base URL
 
 ```javascript
-const BASE_URL = "http://localhost:3001/api/v1");
+const BASE_URL = "http://localhost:3001/api/v1";
 ```
 
 <hr>
